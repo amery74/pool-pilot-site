@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 100">
+<defs><linearGradient id="b" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#24c8ed"/><stop offset="1" stop-color="#1678ed"/></linearGradient></defs>
+<circle cx="48" cy="50" r="40" fill="url(#b)"/>
+<path d="M14 45c14-12 29-12 44 0 11 9 20 9 31 2v11c-12 8-25 7-38-3-12-9-23-9-37 1z" fill="#fff"/>
+<path d="M14 61c14-9 28-8 40 1 12 9 23 10 35 2v10c-13 9-27 8-41-2-11-7-21-7-34 1z" fill="#dff8ff"/>
+<text x="105" y="54" font-family="Arial,sans-serif" font-size="39" font-weight="700" fill="#102044">POOL</text>
+<text x="234" y="54" font-family="Arial,sans-serif" font-size="39" font-weight="700" fill="#168fe8">PILOT</text>
+<text x="107" y="79" font-family="Arial,sans-serif" font-size="15" fill="#51627a">Intégration HACS pour Home Assistant</text>
+</svg>

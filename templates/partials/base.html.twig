@@ -1,0 +1,45 @@
+{% set theme_config = attribute(config.themes, config.system.pages.theme) %}
+<!doctype html>
+<html lang="{{ grav.language.getActive ?: 'fr' }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="{{ page.header.metadata.description|default('Pool Pilot, intégration HACS pour piloter intelligemment votre piscine depuis Home Assistant.') }}">
+  <title>{% if header.title %}{{ header.title }} · {% endif %}Pool Pilot</title>
+  {% do assets.addCss('theme://css/site.css', 100) %}
+  {% do assets.addJs('theme://js/site.js', 100) %}
+  {{ assets.css()|raw }}
+</head>
+<body>
+<header class="site-header">
+  <a class="brand" href="{{ base_url_absolute ?: '/' }}">
+    <img src="{{ url('theme://images/logo-pool-pilot.svg') }}" alt="Pool Pilot">
+  </a>
+  <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-nav">Menu</button>
+  <nav id="main-nav" class="main-nav" aria-label="Navigation principale">
+    <a href="#accueil">Accueil</a>
+    <a href="#fonctionnalites">Fonctionnalités</a>
+    <a href="#installation">Installation</a>
+    <a href="#documentation">Documentation</a>
+    <a href="#compatibilite">Compatibilité</a>
+    <a href="#roadmap">Roadmap</a>
+    <a href="#faq">FAQ</a>
+  </nav>
+  <div class="header-actions">
+    <a class="button button-ghost" href="https://github.com/amery74/ha-poolpilot">GitHub</a>
+    <a class="button" href="#installation">Installer via HACS</a>
+  </div>
+</header>
+<main>{% block content %}{% endblock %}</main>
+<footer class="site-footer">
+  <div><strong>Pool Pilot</strong><span>Projet open source pour Home Assistant, installé via HACS.</span></div>
+  <div class="footer-links">
+    <a href="https://github.com/amery74/ha-poolpilot">GitHub</a>
+    <a href="#documentation">Documentation</a>
+    <a href="#roadmap">Roadmap</a>
+    <span>Licence MIT</span>
+  </div>
+</footer>
+{{ assets.js()|raw }}
+</body>
+</html>
