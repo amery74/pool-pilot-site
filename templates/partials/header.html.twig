@@ -1,0 +1,24 @@
+<header class="site-header">
+  <a class="brand" href="{{ base_url_absolute ?: '/' }}" aria-label="Accueil Pool Pilot">
+    <img src="{{ url('theme://images/logo-pool-pilot.svg') }}" alt="Pool Pilot">
+  </a>
+
+  <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-nav">
+    Menu
+  </button>
+
+  <nav id="main-nav" class="main-nav" aria-label="Navigation principale">
+    <a href="#accueil">Accueil</a>
+    <a href="#fonctionnalites">Fonctionnalités</a>
+    <a href="#installation">Installation</a>
+    <a href="#documentation">Documentation</a>
+    <a href="#compatibilite">Compatibilité</a>
+    <a href="#roadmap">Roadmap</a>
+    <a href="#faq">FAQ</a>
+  </nav>
+
+  <div class="header-actions">
+    <a class="button button-ghost" href="https://github.com/amery74/ha-poolpilot">GitHub</a>
+    <a class="button" href="#installation">Installer via HACS</a>
+  </div>
+</header>

@@ -2,7 +2,9 @@
 
 ## 1.0.0
 
-- Première version du thème Grav Pool Pilot.
-- Page d’accueil responsive.
-- Présentation exacte comme intégration Home Assistant via HACS.
-- Aperçu Home Assistant avec la vraie carte Pool Pilot.
+- Ajout du logo officiel Pool Pilot au format SVG.
+- Ajout du template de page d'accueil `home`.
+- Ajout des partials séparés pour le header et le footer.
+- Première page d'accueil responsive.
+- Présentation de Pool Pilot comme intégration Home Assistant installée via HACS.
+- Aperçu de la carte Pool Pilot dans une interface Home Assistant.
