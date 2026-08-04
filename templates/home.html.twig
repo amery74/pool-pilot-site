@@ -3,82 +3,50 @@
 <section class="hero" id="accueil">
   <div class="hero-copy">
     <span class="eyebrow">INTÉGRATION HOME ASSISTANT VIA HACS</span>
-    <h1>Pilotez intelligemment <span>votre piscine</span> depuis Home Assistant.</h1>
-    <p>Pool Pilot centralise le suivi de l’eau, la filtration, la température, les équipements et les alertes dans une interface claire et cohérente.</p>
-    <ul class="checks">
-      <li>Installation en quelques clics via HACS</li>
-      <li>Surveillance et recommandations intelligentes</li>
-      <li>Automatisations avancées</li>
-      <li>Historique 24 h, 7 jours et 30 jours</li>
-      <li>Alertes et notifications en temps réel</li>
-    </ul>
+    <h1>Votre piscine,<br><span>parfaitement pilotée.</span></h1>
+    <p>Pool Pilot automatise et optimise le fonctionnement de votre piscine depuis Home Assistant, tout en gardant une interface claire et centralisée.</p>
+    <div class="hero-points">
+      <span>⚡ Automatisation</span><span>◉ Surveillance</span><span>▥ Historique</span><span>✓ Sérénité</span>
+    </div>
     <div class="hero-actions">
-      <a class="button" href="#installation">Installer via HACS</a>
-      <a class="button button-ghost" href="#documentation">Voir la documentation</a>
+      <a class="button" href="#fonctionnalites">Découvrir les fonctionnalités</a>
+      <a class="button button-ghost-on-dark" href="#dashboard">Voir le Dashboard</a>
     </div>
-    <p class="microcopy">Open source · Gratuit · Développé pour la communauté Home Assistant</p>
   </div>
 
-  <div class="ha-window" aria-label="Pool Pilot intégré dans Home Assistant">
-    <div class="ha-topbar"><span>☰</span><strong>Home Assistant</strong><span class="ha-icons">⌂　◉　▣　⚡　☷　⋯</span></div>
-    <div class="ha-layout">
+  <div class="ha-showcase" id="dashboard" aria-label="Aperçu réel de Pool Pilot dans Home Assistant">
+    <div class="ha-topbar">
+      <span class="ha-title">☰ &nbsp; Piscine</span>
+      <span>☀️ 21,5 °C &nbsp; ☁️ UV 6 &nbsp; ◷ 16:30</span>
+    </div>
+    <div class="ha-body">
       <aside class="ha-sidebar">
-        <strong>Aperçu</strong><span>Énergie</span><span>Carte</span><span>Journal</span><span>Historique</span><span>Médias</span><span>Listes de tâches</span>
-        <span class="sidebar-spacer"></span><span>Outils de développement</span><span>Paramètres</span><span>Notifications</span>
+        <strong>Vue d’ensemble</strong>
+        <span>Historique</span><span>Équipements</span><span>Entretien</span><span>Produits</span><span>Paramètres</span><span>Maintenance</span>
+        <span class="sidebar-spacer"></span><span>Mode Expert</span>
       </aside>
-      <section class="ha-main">
-        <h2>Piscine</h2>
-        <div class="dashboard-frame"><img src="{{ url('theme://images/pool-pilot-dashboard.png') }}" alt="Carte Pool Pilot Dashboard"></div>
-      </section>
-      <aside class="ha-context">
-        <div class="ha-card"><h3>Entités</h3><dl>
-          <div><dt>Température de l’eau</dt><dd>23,5 °C</dd></div>
-          <div><dt>pH</dt><dd>7,35</dd></div>
-          <div><dt>Chlore libre</dt><dd>1,2 ppm</dd></div>
-          <div><dt>Filtration</dt><dd>Auto</dd></div>
-          <div><dt>Volet</dt><dd>Fermé</dd></div>
-        </dl></div>
-        <div class="ha-card"><h3>Automatisations</h3><p>Filtration intelligente <i></i></p><p>Alertes qualité de l’eau <i></i></p></div>
-      </aside>
+      <div class="dashboard-frame">
+        <img src="{{ url('theme://images/pool-pilot-dashboard.png') }}" alt="Vraie carte Pool Pilot Dashboard">
+      </div>
     </div>
   </div>
 </section>
 
-<section class="section" id="fonctionnalites">
-  <div class="section-heading"><span>FONCTIONNALITÉS</span><h2>Tout ce dont vous avez besoin pour une piscine bien pilotée</h2></div>
-  <div class="feature-grid">
-    <article><b>💧</b><h3>Suivi intelligent de l’eau</h3><p>Mesures en temps réel et recommandations pour maintenir une eau équilibrée.</p></article>
-    <article><b>⚙️</b><h3>Automatisation avancée</h3><p>Filtration et équipements pilotés selon vos réglages et les conditions réelles.</p></article>
-    <article><b>📊</b><h3>Historique et analyses</h3><p>Consultez l’évolution des paramètres sur 24 h, 7 jours ou 30 jours.</p></article>
-    <article><b>🔔</b><h3>Alertes et notifications</h3><p>Soyez informé lorsqu’une intervention nécessite votre attention.</p></article>
-    <article><b>🏊</b><h3>Équipements connectés</h3><p>Filtration, PAC, électrolyseur, volet, éclairage et auxiliaires.</p></article>
-    <article><b>🌤️</b><h3>Météo intégrée</h3><p>Adaptez le fonctionnement de la piscine aux conditions météorologiques.</p></article>
+<section class="feature-strip" id="fonctionnalites">
+  <article><b>◷</b><div><h3>Filtration intelligente</h3><p>Pilotage automatique selon la température, la météo et vos règles.</p></div></article>
+  <article><b>💧</b><div><h3>Qualité de l’eau</h3><p>Suivi du pH et de l’ORP ou du chlore libre.</p></div></article>
+  <article><b>⚡</b><div><h3>Équipements</h3><p>Électrolyseur, PAC, volet et commandes auxiliaires.</p></div></article>
+  <article><b>🔔</b><div><h3>Entretien et alertes</h3><p>Recommandations, rappels et carnet d’entretien.</p></div></article>
+</section>
+
+<section class="section cards-section" id="installation">
+  <div class="section-heading"><span>DÉCOUVRIR POOL PILOT</span><h2>Une intégration conçue pour votre installation</h2></div>
+  <div class="info-grid">
+    <article><h3>Installation simple</h3><ol><li>Ajouter le dépôt dans HACS</li><li>Installer l’intégration</li><li>Configurer les équipements</li><li>Ajouter la carte Dashboard</li></ol><a href="#documentation">Voir le guide d’installation →</a></article>
+    <article id="compatibilite"><h3>Compatibilité</h3><ul><li>Home Assistant</li><li>Poolex Aqualyser</li><li>Capteurs pH, ORP et chlore libre</li><li>PAC, électrolyseur, volet et auxiliaires</li></ul><a href="#documentation">Voir les équipements →</a></article>
+    <article><h3>Dashboard</h3><p>La carte Pool Pilot centralise les mesures, commandes, alertes et historiques dans Home Assistant.</p><a href="#dashboard">Voir la carte en grand →</a></article>
+    <article id="roadmap"><h3>Roadmap</h3><p>Le projet évolue avec de nouvelles fonctions, optimisations et compatibilités.</p><a href="#documentation">Voir la roadmap →</a></article>
   </div>
-</section>
-
-<section class="section section-alt" id="installation">
-  <div class="section-heading"><span>INSTALLATION</span><h2>Installation simple via HACS en quatre étapes</h2></div>
-  <ol class="steps">
-    <li><b>1</b><h3>Ajouter le dépôt HACS</h3><p>Ajoutez le dépôt Pool Pilot aux dépôts personnalisés.</p></li>
-    <li><b>2</b><h3>Installer l’intégration</h3><p>Recherchez Pool Pilot puis lancez l’installation.</p></li>
-    <li><b>3</b><h3>Redémarrer Home Assistant</h3><p>Redémarrez pour charger l’intégration.</p></li>
-    <li><b>4</b><h3>Ajouter la carte Dashboard</h3><p>Ajoutez la carte Pool Pilot à Lovelace.</p></li>
-  </ol>
-</section>
-
-<section class="section" id="compatibilite">
-  <div class="section-heading"><span>POURQUOI POOL PILOT ?</span><h2>Un projet ouvert, local et évolutif</h2></div>
-  <div class="why-grid">
-    <article><b>🛡️</b><h3>Open source</h3><p>Code transparent et contributions bienvenues.</p></article>
-    <article><b>🧩</b><h3>Compatible HACS</h3><p>Installation et mises à jour depuis HACS.</p></article>
-    <article><b>🔒</b><h3>Données locales</h3><p>Le pilotage reste dans votre environnement Home Assistant.</p></article>
-    <article><b>🚀</b><h3>Évolutif</h3><p>De nouvelles fonctions sont ajoutées régulièrement.</p></article>
-  </div>
-</section>
-
-<section class="cta" id="roadmap">
-  <div><h2>Prêt à reprendre le contrôle de votre piscine ?</h2><p>Centralisez la gestion de votre bassin dans Home Assistant.</p></div>
-  <a class="button" href="#installation">Installer via HACS</a>
 </section>
 <div id="documentation"></div><div id="faq"></div>
 {% endblock %}

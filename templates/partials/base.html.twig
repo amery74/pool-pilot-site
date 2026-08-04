@@ -4,11 +4,14 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="{{ page.header.metadata.description|default('Pool Pilot, intégration HACS pour piloter intelligemment votre piscine depuis Home Assistant.') }}">
+  <meta name="description" content="{{ page.header.metadata.description|default('Pool Pilot, intégration HACS pour piloter votre piscine depuis Home Assistant.') }}">
+  <meta property="og:title" content="Pool Pilot">
+  <meta property="og:description" content="L’intégration HACS pour piloter votre piscine depuis Home Assistant.">
+  <meta property="og:image" content="{{ url('theme://images/social-preview.png', true) }}">
   <title>{% if header.title %}{{ header.title }} · {% endif %}Pool Pilot</title>
-
-  <link rel="icon" href="{{ url('theme://images/logo.svg') }}" type="image/svg+xml">
-
+  <link rel="icon" href="{{ url('theme://images/favicon.svg') }}" type="image/svg+xml">
+  <link rel="icon" href="{{ url('theme://images/favicon.ico') }}">
+  <link rel="apple-touch-icon" href="{{ url('theme://images/apple-touch-icon.png') }}">
   {% do assets.addCss('theme://css/site.css', 100) %}
   {% do assets.addJs('theme://js/site.js', 100) %}
   {{ assets.css()|raw }}
