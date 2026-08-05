@@ -14,9 +14,9 @@
   <link rel="icon" href="{{ url('theme://images/favicon-32.png') }}" sizes="32x32">
   <link rel="apple-touch-icon" href="{{ url('theme://images/apple-touch-icon.png') }}">
 
-  {% do assets.addCss('theme://css/site.css', 100) %}
-  {% do assets.addCss('theme://css/features.css', 90) %}
-  {% do assets.addJs('theme://js/site.js', 100) %}
+  {% do assets.addCss('theme://css/site.css?v=034', 100) %}
+  {% do assets.addCss('theme://css/features.css?v=034', 90) %}
+  {% do assets.addJs('theme://js/site.js?v=034', 100) %}
   {{ assets.css()|raw }}
 </head>
 <body>
