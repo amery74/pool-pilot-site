@@ -61,54 +61,215 @@
   </div>
 </section>
 
-<section class="features" id="fonctionnalites">
+<section class="section section-features" id="fonctionnalites">
   <header class="section-heading">
     <span>FONCTIONNALITÉS</span>
     <h2>Une seule interface pour comprendre et piloter votre bassin</h2>
+    <p>
+      Pool Pilot regroupe les informations importantes et les commandes de votre piscine
+      sans ajouter de tableau de bord artificiel en dehors de Home Assistant.
+    </p>
   </header>
 
   <div class="feature-grid">
     <article>
-      <b aria-hidden="true">💧</b>
+      <div class="feature-icon" aria-hidden="true">💧</div>
       <h3>Analyse de l’eau</h3>
-      <p>pH, ORP ou chlore libre, seuils, alertes et recommandations.</p>
+      <p>pH, ORP ou chlore libre, température, seuils, alertes et recommandations.</p>
     </article>
     <article>
-      <b aria-hidden="true">⚙️</b>
-      <h3>Filtration intelligente</h3>
-      <p>Durée recommandée, horaires et fonctionnement automatique.</p>
+      <div class="feature-icon" aria-hidden="true">⚙️</div>
+      <h3>Automatisation avancée</h3>
+      <p>Filtration, PAC et électrolyseur pilotés selon vos paramètres et conditions réelles.</p>
     </article>
     <article>
-      <b aria-hidden="true">🏊</b>
-      <h3>Équipements</h3>
-      <p>PAC, électrolyseur, volet, éclairage et équipements auxiliaires.</p>
+      <div class="feature-icon" aria-hidden="true">🔔</div>
+      <h3>Alertes intelligentes</h3>
+      <p>Notifications et recommandations lorsqu’une action ou une correction est nécessaire.</p>
     </article>
     <article>
-      <b aria-hidden="true">📊</b>
+      <div class="feature-icon" aria-hidden="true">📊</div>
       <h3>Historique</h3>
-      <p>Consultez les mesures sur 24 heures, 7 jours et 30 jours.</p>
+      <p>Consultez les mesures et tendances sur 24 heures, 7 jours et 30 jours.</p>
     </article>
     <article>
-      <b aria-hidden="true">🧰</b>
+      <div class="feature-icon" aria-hidden="true">🧰</div>
       <h3>Entretien</h3>
-      <p>Carnet, produits, interventions et rappels centralisés.</p>
+      <p>Carnet d’entretien, produits, interventions, stocks et rappels centralisés.</p>
     </article>
     <article>
-      <b aria-hidden="true">🔔</b>
-      <h3>Notifications</h3>
-      <p>Alertes et recommandations lorsque votre attention est nécessaire.</p>
+      <div class="feature-icon" aria-hidden="true">🏊</div>
+      <h3>Équipements</h3>
+      <p>Filtration, pompe à chaleur, électrolyseur, volet, éclairage et auxiliaires.</p>
     </article>
   </div>
 </section>
 
-<section class="placeholder-section" id="installation">
-  <span>INSTALLATION</span>
-  <h2>Installation via HACS</h2>
-  <p>Le guide détaillé sera ajouté dans la prochaine version.</p>
+<section class="section section-dashboard">
+  <div class="dashboard-showcase">
+    <div class="dashboard-showcase-copy">
+      <span class="section-label">POOL PILOT DASHBOARD</span>
+      <h2>La carte Pool Pilot reste au centre de l’expérience</h2>
+      <p>
+        Le site présente le projet, mais le pilotage reste dans Home Assistant.
+        Vous retrouvez une vue unique pour suivre l’eau, les cycles, la météo,
+        les équipements et les recommandations.
+      </p>
+      <ul>
+        <li>Carte Lovelace installée via HACS</li>
+        <li>Interface adaptée au mobile et au bureau</li>
+        <li>Modes simple et expert</li>
+        <li>Commandes regroupées dans une seule carte</li>
+      </ul>
+    </div>
+
+    <div class="dashboard-showcase-image">
+      <div class="showcase-browser-bar">
+        <span></span><span></span><span></span>
+        <strong>Home Assistant · Piscine</strong>
+      </div>
+      <img
+        src="{{ url('theme://images/pool-pilot-dashboard.png') }}"
+        alt="Capture de Pool Pilot Dashboard">
+    </div>
+  </div>
 </section>
 
-<div id="documentation"></div>
-<div id="compatibilite"></div>
-<div id="roadmap"></div>
-<div id="faq"></div>
+<section class="section section-installation" id="installation">
+  <header class="section-heading">
+    <span>INSTALLATION</span>
+    <h2>Installer Pool Pilot via HACS</h2>
+    <p>Une installation en quatre étapes, directement depuis votre instance Home Assistant.</p>
+  </header>
+
+  <ol class="installation-steps">
+    <li>
+      <b>1</b>
+      <div>
+        <h3>Ajouter le dépôt</h3>
+        <p>Ajoutez le dépôt de l’intégration Pool Pilot dans les dépôts personnalisés HACS.</p>
+      </div>
+    </li>
+    <li>
+      <b>2</b>
+      <div>
+        <h3>Installer l’intégration</h3>
+        <p>Recherchez Pool Pilot dans HACS, installez-la puis redémarrez Home Assistant.</p>
+      </div>
+    </li>
+    <li>
+      <b>3</b>
+      <div>
+        <h3>Configurer les équipements</h3>
+        <p>Sélectionnez vos capteurs, votre filtration et les équipements disponibles.</p>
+      </div>
+    </li>
+    <li>
+      <b>4</b>
+      <div>
+        <h3>Ajouter la carte Dashboard</h3>
+        <p>Installez Pool Pilot Dashboard puis ajoutez la carte à votre vue Lovelace.</p>
+      </div>
+    </li>
+  </ol>
+
+  <div class="section-action">
+    <a class="button" href="#documentation">Consulter la documentation</a>
+  </div>
+</section>
+
+<section class="section section-compatibility" id="compatibilite">
+  <header class="section-heading">
+    <span>COMPATIBILITÉ</span>
+    <h2>Conçu pour votre environnement Home Assistant</h2>
+    <p>Pool Pilot s’appuie sur les entités que vous avez déjà intégrées à Home Assistant.</p>
+  </header>
+
+  <div class="compatibility-list">
+    <span>Home Assistant</span>
+    <span>HACS</span>
+    <span>Poolex Aqualyser</span>
+    <span>Capteurs pH</span>
+    <span>ORP / Redox</span>
+    <span>Chlore libre</span>
+    <span>Filtration</span>
+    <span>Pompe à chaleur</span>
+    <span>Électrolyseur</span>
+    <span>Volet</span>
+    <span>Éclairage</span>
+    <span>Équipements auxiliaires</span>
+  </div>
+</section>
+
+<section class="section section-documentation" id="documentation">
+  <div>
+    <span class="section-label">DOCUMENTATION</span>
+    <h2>Des guides simples pour installer et configurer Pool Pilot</h2>
+    <p>
+      La documentation détaillée sera développée dans les prochaines versions du site :
+      installation, configuration, entités, dépannage, carte Dashboard et mises à jour.
+    </p>
+  </div>
+  <div class="documentation-list">
+    <span><b>01</b> Installation</span>
+    <span><b>02</b> Configuration</span>
+    <span><b>03</b> Dashboard</span>
+    <span><b>04</b> Dépannage</span>
+  </div>
+</section>
+
+<section class="section section-roadmap" id="roadmap">
+  <header class="section-heading">
+    <span>ROADMAP</span>
+    <h2>Un projet en évolution continue</h2>
+  </header>
+
+  <div class="roadmap-grid">
+    <article>
+      <small>VERSION ACTUELLE</small>
+      <h3>v1.2.3</h3>
+      <p>Mode Maintenance, carnet d’entretien, produits, notifications et amélioration de la carte.</p>
+    </article>
+    <article>
+      <small>EN COURS</small>
+      <h3>Corrections et tests</h3>
+      <p>Stabilisation des fonctions existantes et amélioration de la compatibilité.</p>
+    </article>
+    <article>
+      <small>PLUS TARD</small>
+      <h3>Fonctions avancées</h3>
+      <p>Régulation avancée et nouvelles intégrations selon les besoins du projet.</p>
+    </article>
+  </div>
+</section>
+
+<section class="section section-faq" id="faq">
+  <header class="section-heading">
+    <span>FAQ</span>
+    <h2>Questions fréquentes</h2>
+  </header>
+
+  <div class="faq-list">
+    <details>
+      <summary>Pool Pilot est-il une intégration native de Home Assistant ?</summary>
+      <p>Non. Pool Pilot est une intégration personnalisée installée et mise à jour via HACS.</p>
+    </details>
+    <details>
+      <summary>La carte Pool Pilot Dashboard est-elle obligatoire ?</summary>
+      <p>L’intégration et la carte sont complémentaires. La carte permet de profiter de l’interface complète.</p>
+    </details>
+    <details>
+      <summary>Les données restent-elles dans Home Assistant ?</summary>
+      <p>Pool Pilot utilise les entités et services configurés dans votre environnement Home Assistant.</p>
+    </details>
+  </div>
+</section>
+
+<section class="final-cta">
+  <div>
+    <h2>Prêt à piloter votre piscine depuis Home Assistant ?</h2>
+    <p>Installez Pool Pilot via HACS et centralisez votre bassin dans une seule interface.</p>
+  </div>
+  <a class="button button-light" href="#installation">Installer via HACS</a>
+</section>
 {% endblock %}
