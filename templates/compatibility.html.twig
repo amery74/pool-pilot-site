@@ -1,0 +1,306 @@
+{% extends 'partials/base.html.twig' %}
+
+{% block content %}
+<section class="compat-hero">
+  <div class="compat-hero-inner">
+    <span class="eyebrow">COMPATIBILITÉ</span>
+    <h1>Compatible avec votre<br><span>installation Home Assistant.</span></h1>
+    <p>
+      Pool Pilot s’appuie sur les entités déjà présentes dans Home Assistant.
+      Aucun matériel propriétaire ni abonnement supplémentaire n’est imposé.
+    </p>
+    <div class="compat-hero-actions">
+      <a class="button button-light" href="{{ base_url_absolute }}/installation">
+        Installer via HACS
+      </a>
+      <a class="button button-outline" href="#principe">
+        Comprendre la compatibilité
+      </a>
+    </div>
+  </div>
+</section>
+
+<nav class="compat-toc" aria-label="Sommaire de la compatibilité">
+  <a href="#principe">Principe</a>
+  <a href="#capteurs">Capteurs</a>
+  <a href="#mesures">Mesures</a>
+  <a href="#equipements">Équipements</a>
+  <a href="#ecosysteme">Écosystème</a>
+  <a href="#valides">Matériels validés</a>
+  <a href="#limitations">À savoir</a>
+</nav>
+
+<section class="compat-section" id="principe">
+  <div class="compat-heading">
+    <span>PRINCIPE DE FONCTIONNEMENT</span>
+    <h2>Pool Pilot utilise vos entités Home Assistant</h2>
+    <p>
+      Pool Pilot ne remplace pas les intégrations de vos équipements. Il regroupe,
+      interprète et pilote les entités déjà disponibles dans votre instance.
+    </p>
+  </div>
+
+  <div class="compat-flow">
+    <article>
+      <span>1</span>
+      <h3>Votre matériel</h3>
+      <p>Sonde, filtration, PAC, électrolyseur, volet ou éclairage.</p>
+    </article>
+    <div class="compat-arrow" aria-hidden="true">→</div>
+    <article>
+      <span>2</span>
+      <h3>Home Assistant</h3>
+      <p>Une intégration expose les mesures, commandes et états sous forme d’entités.</p>
+    </article>
+    <div class="compat-arrow" aria-hidden="true">→</div>
+    <article>
+      <span>3</span>
+      <h3>Pool Pilot</h3>
+      <p>Pool Pilot centralise les données et applique ses fonctions de suivi et d’automatisation.</p>
+    </article>
+  </div>
+
+  <aside class="compat-callout compat-callout-info">
+    <strong>Règle simple</strong>
+    <p>
+      Si votre équipement est correctement pilotable dans Home Assistant avec une entité
+      adaptée, il peut généralement être utilisé par Pool Pilot.
+    </p>
+  </aside>
+</section>
+
+<section class="compat-section compat-section-alt" id="capteurs">
+  <div class="compat-heading">
+    <span>SOURCES DE DONNÉES</span>
+    <h2>Capteurs et intégrations compatibles</h2>
+    <p>Pool Pilot accepte les valeurs provenant de nombreuses sources Home Assistant.</p>
+  </div>
+
+  <div class="compat-card-grid">
+    <article class="compat-card compat-card-confirmed">
+      <div class="compat-status">VALIDÉ</div>
+      <div class="compat-icon" aria-hidden="true">💧</div>
+      <h3>Flipr Local</h3>
+      <p>Mesures récupérées localement via l’intégration Home Assistant compatible.</p>
+    </article>
+    <article class="compat-card">
+      <div class="compat-status">COMPATIBLE</div>
+      <div class="compat-icon" aria-hidden="true">⚙️</div>
+      <h3>ESPHome</h3>
+      <p>Capteurs personnalisés exposés directement dans Home Assistant.</p>
+    </article>
+    <article class="compat-card">
+      <div class="compat-status">COMPATIBLE</div>
+      <div class="compat-icon" aria-hidden="true">📡</div>
+      <h3>MQTT</h3>
+      <p>Mesures et commandes publiées sous forme d’entités MQTT.</p>
+    </article>
+    <article class="compat-card">
+      <div class="compat-status">COMPATIBLE</div>
+      <div class="compat-icon" aria-hidden="true">🏠</div>
+      <h3>Entités Home Assistant</h3>
+      <p>Toute source créant une entité avec une valeur et une unité cohérentes.</p>
+    </article>
+  </div>
+</section>
+
+<section class="compat-section" id="mesures">
+  <div class="compat-heading">
+    <span>MESURES PRISES EN CHARGE</span>
+    <h2>Les paramètres utiles au suivi de l’eau</h2>
+  </div>
+
+  <div class="compat-measure-grid">
+    <article><span>°C</span><h3>Température de l’eau</h3><p>Mesure principale utilisée pour le suivi et la filtration.</p></article>
+    <article><span>pH</span><h3>pH</h3><p>Valeur d’acidité ou d’alcalinité du bassin.</p></article>
+    <article><span>mV</span><h3>ORP / Redox</h3><p>Mode de suivi de la capacité oxydante de l’eau.</p></article>
+    <article><span>ppm</span><h3>Chlore libre</h3><p>Alternative au suivi ORP pour les installations compatibles.</p></article>
+    <article><span>µS</span><h3>Conductivité</h3><p>Valeur informative lorsqu’une entité compatible est disponible.</p></article>
+    <article><span>g/L</span><h3>Salinité</h3><p>Suivi du niveau de sel selon le matériel et l’intégration utilisés.</p></article>
+    <article><span>mg/L</span><h3>TAC, TH et stabilisant</h3><p>Valeurs saisies ou récupérées pour le mode Expert et la balance de Taylor.</p></article>
+    <article><span>☀</span><h3>Météo et UV</h3><p>Données extérieures issues des intégrations Home Assistant.</p></article>
+  </div>
+
+  <aside class="compat-callout compat-callout-warning">
+    <strong>Unités et valeurs</strong>
+    <p>
+      Les entités doivent renvoyer une valeur numérique exploitable. Une unité incorrecte,
+      un état textuel ou une entité indisponible peut empêcher l’affichage ou le calcul.
+    </p>
+  </aside>
+</section>
+
+<section class="compat-section compat-section-alt" id="equipements">
+  <div class="compat-heading">
+    <span>ÉQUIPEMENTS PILOTABLES</span>
+    <h2>Centralisez les principaux équipements de la piscine</h2>
+    <p>Les fonctions visibles dépendent des entités sélectionnées lors de la configuration.</p>
+  </div>
+
+  <div class="equipment-grid">
+    <article>
+      <div class="equipment-icon" aria-hidden="true">🌊</div>
+      <h3>Filtration</h3>
+      <p>Compatible avec une entité de commande marche/arrêt, généralement de type <code>switch</code>.</p>
+    </article>
+    <article>
+      <div class="equipment-icon" aria-hidden="true">🔥</div>
+      <h3>Pompe à chaleur</h3>
+      <p>Commande, consigne et modes selon les entités disponibles dans Home Assistant.</p>
+    </article>
+    <article>
+      <div class="equipment-icon" aria-hidden="true">⚡</div>
+      <h3>Électrolyseur</h3>
+      <p>Marche/arrêt, pourcentage de production et Boost lorsque ces fonctions sont exposées.</p>
+    </article>
+    <article>
+      <div class="equipment-icon" aria-hidden="true">🧪</div>
+      <h3>Pompe pH</h3>
+      <p>Commande et suivi d’une pompe doseuse intégrée à Home Assistant.</p>
+    </article>
+    <article>
+      <div class="equipment-icon" aria-hidden="true">💧</div>
+      <h3>Pompe chlore</h3>
+      <p>Prise en charge d’une commande de désinfection compatible.</p>
+    </article>
+    <article>
+      <div class="equipment-icon" aria-hidden="true">↕</div>
+      <h3>Volet</h3>
+      <p>Compatible avec une entité <code>cover</code> proposant ouverture, arrêt et fermeture.</p>
+    </article>
+    <article>
+      <div class="equipment-icon" aria-hidden="true">💡</div>
+      <h3>Éclairage</h3>
+      <p>Commande d’une entité <code>light</code> ou d’un interrupteur selon l’installation.</p>
+    </article>
+    <article>
+      <div class="equipment-icon" aria-hidden="true">🔌</div>
+      <h3>Auxiliaires</h3>
+      <p>Autres équipements exposés sous une forme compatible dans Home Assistant.</p>
+    </article>
+  </div>
+</section>
+
+<section class="compat-section" id="ecosysteme">
+  <div class="compat-heading">
+    <span>ÉCOSYSTÈME HOME ASSISTANT</span>
+    <h2>Conçu pour s’intégrer à votre installation existante</h2>
+  </div>
+
+  <div class="ecosystem-grid">
+    <article><strong>Home Assistant</strong><span>Requis</span><p>Plateforme centrale du projet.</p></article>
+    <article><strong>HACS</strong><span>Installation</span><p>Distribution et mises à jour de l’intégration et de la carte.</p></article>
+    <article><strong>Lovelace</strong><span>Interface</span><p>Affichage de Pool Pilot Dashboard.</p></article>
+    <article><strong>Application mobile</strong><span>Notifications</span><p>Réception des alertes et résumés sur smartphone.</p></article>
+    <article><strong>Météo-France</strong><span>Optionnel</span><p>Météo, prévisions et vigilances selon les entités disponibles.</p></article>
+    <article><strong>MQTT</strong><span>Optionnel</span><p>Capteurs et équipements communiquant via MQTT.</p></article>
+    <article><strong>ESPHome</strong><span>Optionnel</span><p>Capteurs et contrôleurs personnalisés.</p></article>
+    <article><strong>Zigbee2MQTT / ZHA</strong><span>Optionnel</span><p>Commande de modules Zigbee exposés à Home Assistant.</p></article>
+  </div>
+</section>
+
+<section class="compat-section compat-section-alt" id="valides">
+  <div class="compat-heading">
+    <span>COMPATIBILITÉ VALIDÉE</span>
+    <h2>Matériels et configurations déjà testés</h2>
+    <p>
+      Cette liste distingue les équipements réellement validés des compatibilités
+      génériques permises par les entités Home Assistant.
+    </p>
+  </div>
+
+  <div class="validated-grid">
+    <article class="validated-card">
+      <div class="validated-badge">VALIDÉ</div>
+      <h3>Poolex Aqualyser</h3>
+      <p>Compatibilité vérifiée avec les mesures et fonctions disponibles dans Home Assistant.</p>
+    </article>
+    <article class="validated-card">
+      <div class="validated-badge">VALIDÉ</div>
+      <h3>Flipr Local</h3>
+      <p>Utilisation des mesures locales exposées dans Home Assistant.</p>
+    </article>
+    <article class="validated-card validated-card-generic">
+      <div class="validated-badge">GÉNÉRIQUE</div>
+      <h3>Pompes à chaleur</h3>
+      <p>Compatibles lorsque leurs commandes et consignes sont disponibles sous forme d’entités adaptées.</p>
+    </article>
+    <article class="validated-card validated-card-generic">
+      <div class="validated-badge">GÉNÉRIQUE</div>
+      <h3>Volets de piscine</h3>
+      <p>Compatibles lorsqu’ils sont exposés sous forme d’entité <code>cover</code>.</p>
+    </article>
+    <article class="validated-card validated-card-generic">
+      <div class="validated-badge">GÉNÉRIQUE</div>
+      <h3>Filtration</h3>
+      <p>Compatible avec une commande marche/arrêt fiable dans Home Assistant.</p>
+    </article>
+    <article class="validated-card validated-card-generic">
+      <div class="validated-badge">GÉNÉRIQUE</div>
+      <h3>Électrolyseurs</h3>
+      <p>Fonctions disponibles selon les entités exposées par l’intégration du fabricant.</p>
+    </article>
+  </div>
+
+  <aside class="compat-callout compat-callout-info">
+    <strong>Votre matériel n’est pas dans la liste ?</strong>
+    <p>
+      Cela ne signifie pas qu’il est incompatible. Vérifiez les entités créées dans
+      Home Assistant et comparez-les aux types attendus par Pool Pilot.
+    </p>
+  </aside>
+</section>
+
+<section class="compat-section" id="limitations">
+  <div class="compat-heading">
+    <span>CE QUE POOL PILOT N’IMPOSE PAS</span>
+    <h2>Une solution locale, ouverte et sans matériel dédié</h2>
+  </div>
+
+  <div class="not-required-grid">
+    <article><span aria-hidden="true">×</span><h3>Cloud obligatoire</h3><p>Pool Pilot fonctionne dans votre environnement Home Assistant.</p></article>
+    <article><span aria-hidden="true">×</span><h3>Abonnement</h3><p>Aucun abonnement Pool Pilot n’est nécessaire.</p></article>
+    <article><span aria-hidden="true">×</span><h3>Serveur externe</h3><p>Les fonctions principales sont exécutées localement.</p></article>
+    <article><span aria-hidden="true">×</span><h3>Matériel propriétaire</h3><p>Vous conservez les équipements et intégrations de votre choix.</p></article>
+    <article><span aria-hidden="true">×</span><h3>Passerelle spécifique</h3><p>Seule la présence des entités dans Home Assistant est importante.</p></article>
+    <article><span aria-hidden="true">×</span><h3>Application supplémentaire</h3><p>Le pilotage reste accessible depuis Home Assistant.</p></article>
+  </div>
+
+  <div class="compat-summary">
+    <h3>Récapitulatif</h3>
+    <div class="compat-summary-table">
+      <div><span>Home Assistant</span><strong class="yes">Compatible</strong></div>
+      <div><span>Installation via HACS</span><strong class="yes">Oui</strong></div>
+      <div><span>Dashboard Lovelace</span><strong class="yes">Oui</strong></div>
+      <div><span>Mobile, tablette et ordinateur</span><strong class="yes">Oui</strong></div>
+      <div><span>Fonctionnement local</span><strong class="yes">Oui</strong></div>
+      <div><span>Cloud Pool Pilot obligatoire</span><strong class="no">Non</strong></div>
+      <div><span>Abonnement Pool Pilot</span><strong class="no">Non</strong></div>
+      <div><span>Projet open source</span><strong class="yes">Oui</strong></div>
+    </div>
+  </div>
+</section>
+
+<section class="compat-section compat-section-alt">
+  <div class="compat-heading">
+    <span>EN COURS DE VALIDATION</span>
+    <h2>Le périmètre continue d’évoluer</h2>
+  </div>
+
+  <div class="testing-grid">
+    <article><span>À L’ÉTUDE</span><h3>Piscines au brome</h3><p>Adaptation des recommandations et seuils spécifiques.</p></article>
+    <article><span>À L’ÉTUDE</span><h3>Régulation avancée</h3><p>Pilotage plus fin de la désinfection selon ORP ou chlore libre.</p></article>
+    <article><span>TESTS COMMUNAUTAIRES</span><h3>Autres électrolyseurs</h3><p>Validation progressive selon les intégrations et retours utilisateurs.</p></article>
+  </div>
+</section>
+
+<section class="compat-final-cta">
+  <div>
+    <h2>Votre installation est déjà dans Home Assistant ?</h2>
+    <p>Installez Pool Pilot via HACS et rassemblez votre piscine dans une seule interface.</p>
+  </div>
+  <a class="button button-light" href="{{ base_url_absolute }}/installation">
+    Voir le guide d’installation
+  </a>
+</section>
+{% endblock %}
