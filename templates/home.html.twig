@@ -138,6 +138,123 @@
   </div>
 </section>
 
+<section class="section home-project-showcase">
+  <header class="section-heading">
+    <span>POOL PILOT EN IMAGES</span>
+    <h2>Découvrez concrètement l’interface et ses principaux outils</h2>
+    <p>
+      Pool Pilot ne se limite pas à une page de mesures. La carte regroupe le suivi,
+      les réglages, l’entretien, les alertes et les équipements dans Home Assistant.
+    </p>
+  </header>
+
+  <div class="home-showcase-main">
+    <div class="home-showcase-copy">
+      <span class="section-label">VUE PRINCIPALE</span>
+      <h3>Une lecture immédiate de votre piscine</h3>
+      <p>
+        La vue principale affiche les paramètres essentiels, les recommandations,
+        la filtration et les équipements sans quitter Home Assistant.
+      </p>
+      <ul>
+        <li>Mesures principales regroupées</li>
+        <li>Alertes et recommandations visibles</li>
+        <li>Accès direct aux commandes</li>
+        <li>Interface adaptée au mobile</li>
+      </ul>
+    </div>
+
+    <figure class="home-large-shot">
+      <a href="{{ url('theme://images/installation/11-dashboard-resultat.webp') }}" target="_blank">
+        <img
+          src="{{ url('theme://images/installation/11-dashboard-resultat.webp') }}"
+          alt="Vue principale complète de Pool Pilot Dashboard"
+          loading="lazy">
+      </a>
+      <figcaption>La vue principale de Pool Pilot Dashboard</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="section home-gallery-section">
+  <header class="section-heading">
+    <span>UNE CARTE COMPLÈTE</span>
+    <h2>Des outils pour le suivi quotidien et les réglages avancés</h2>
+  </header>
+
+  {% set home_gallery = [
+    ['10-dashboard-analyse.webp', 'Analyse', 'Consultez les mesures, tendances et recommandations.'],
+    ['16-mode-expert.webp', 'Mode Expert', 'Accédez aux informations et paramètres avancés.'],
+    ['12-carnet-entretien.webp', 'Carnet d’entretien', 'Conservez l’historique des interventions.'],
+    ['17-balance-taylor-bilan.webp', 'Balance de Taylor', 'Visualisez l’équilibre global de l’eau.'],
+    ['22-pool-house-produits.webp', 'Pool House', 'Suivez les produits et les stocks disponibles.'],
+    ['23-alerte-recommandation.webp', 'Alertes', 'Identifiez rapidement les actions à effectuer.']
+  ] %}
+
+  <div class="home-feature-gallery">
+    {% for shot in home_gallery %}
+    <article>
+      <a href="{{ url('theme://images/installation/' ~ shot[0]) }}" target="_blank">
+        <div class="home-gallery-image">
+          <img
+            src="{{ url('theme://images/installation/' ~ shot[0]) }}"
+            alt="{{ shot[1] }}"
+            loading="lazy">
+        </div>
+      </a>
+      <div class="home-gallery-copy">
+        <h3>{{ shot[1] }}</h3>
+        <p>{{ shot[2] }}</p>
+      </div>
+    </article>
+    {% endfor %}
+  </div>
+
+  <div class="section-action">
+    <a class="button" href="{{ base_url_absolute }}/fonctionnalites">
+      Découvrir toutes les fonctionnalités
+    </a>
+  </div>
+</section>
+
+<section class="section home-responsive-section">
+  <div class="home-responsive-grid">
+    <div class="home-responsive-copy">
+      <span class="section-label">MOBILE ET BUREAU</span>
+      <h2>La même expérience sur tous vos appareils</h2>
+      <p>
+        Pool Pilot Dashboard s’intègre à vos vues Home Assistant et reste utilisable
+        depuis un téléphone, une tablette ou un ordinateur.
+      </p>
+      <ul>
+        <li>Navigation pensée pour les écrans tactiles</li>
+        <li>Informations organisées sans multiplier les cartes</li>
+        <li>Accès aux commandes essentielles en déplacement</li>
+        <li>Mode Expert disponible lorsque vous en avez besoin</li>
+      </ul>
+    </div>
+
+    <div class="home-device-presentation">
+      <figure class="home-device desktop">
+        <div class="device-topbar">
+          <span></span><span></span><span></span>
+        </div>
+        <img
+          src="{{ url('theme://images/installation/10-dashboard-analyse.webp') }}"
+          alt="Pool Pilot sur ordinateur"
+          loading="lazy">
+      </figure>
+
+      <figure class="home-device mobile">
+        <img
+          src="{{ url('theme://images/installation/16-mode-expert.webp') }}"
+          alt="Pool Pilot sur mobile"
+          loading="lazy">
+      </figure>
+    </div>
+  </div>
+</section>
+
 <section class="section section-installation" id="installation">
   <header class="section-heading">
     <span>INSTALLATION</span>
