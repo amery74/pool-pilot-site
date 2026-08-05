@@ -1,28 +1,26 @@
-# Pool Pilot Website
+# Pool Pilot — thème Grav v0.1.0
 
-Thème Grav du site officiel Pool Pilot.
+Version minimale et stable du thème Pool Pilot.
 
-## Installation dans Grav
+## Installation
 
-Le dépôt doit être cloné dans :
+Le contenu du dépôt doit être installé dans :
 
 ```text
 /opt/grav/user/themes/poolpilot
 ```
 
-## Activation
-
 Dans Grav Admin :
 
 1. Configuration → Système → Pages.
-2. Choisir **Pool Pilot** comme thème par défaut.
-3. Ouvrir la page d'accueil.
-4. Onglet **Avancé**.
-5. Choisir le modèle **home**.
+2. Choisir `Pool Pilot` comme thème par défaut.
+3. Ouvrir la page d’accueil.
+4. Onglet Avancé.
+5. Choisir le modèle `home`.
 6. Enregistrer.
 7. Vider le cache Grav.
 
-## Mise à jour du serveur
+## Mise à jour depuis GitHub
 
 ```bash
 cd /opt/grav/user/themes/poolpilot

@@ -1,16 +1,16 @@
 name: Pool Pilot
 slug: poolpilot
 type: theme
-version: 1.0.0
-description: Thème officiel du site pool-pilot.app
+version: 0.1.0
+description: Thème officiel du site Pool Pilot
 icon: tint
 author:
   name: amery74
 homepage: https://pool-pilot.app
-keywords: grav, home assistant, hacs, pool pilot
+keywords: grav, pool pilot, home assistant, hacs
 license: MIT
 dependencies:
-  - { name: grav, version: '>=2.0.0' }
+  - { name: grav, version: '>=1.7.0' }
 
 form:
   validation: loose

@@ -1,52 +1,114 @@
 {% extends 'partials/base.html.twig' %}
+
 {% block content %}
 <section class="hero" id="accueil">
   <div class="hero-copy">
     <span class="eyebrow">INTÉGRATION HOME ASSISTANT VIA HACS</span>
     <h1>Votre piscine,<br><span>parfaitement pilotée.</span></h1>
-    <p>Pool Pilot automatise et optimise le fonctionnement de votre piscine depuis Home Assistant, tout en gardant une interface claire et centralisée.</p>
-    <div class="hero-points">
-      <span>⚡ Automatisation</span><span>◉ Surveillance</span><span>▥ Historique</span><span>✓ Sérénité</span>
-    </div>
+    <p>
+      Pool Pilot centralise le suivi de l’eau, la filtration, le chauffage,
+      les équipements, l’entretien et les alertes directement dans Home Assistant.
+    </p>
+
+    <ul class="hero-list">
+      <li>Installation et mises à jour via HACS</li>
+      <li>Automatisations avancées</li>
+      <li>Historique sur 24 h, 7 jours et 30 jours</li>
+      <li>Notifications et recommandations</li>
+    </ul>
+
     <div class="hero-actions">
-      <a class="button" href="#fonctionnalites">Découvrir les fonctionnalités</a>
-      <a class="button button-ghost-on-dark" href="#dashboard">Voir le Dashboard</a>
+      <a class="button button-light" href="#installation">Installer via HACS</a>
+      <a class="button button-outline" href="#fonctionnalites">Découvrir les fonctionnalités</a>
     </div>
+
+    <small>Open source · Données locales · Projet communautaire</small>
   </div>
 
-  <div class="ha-showcase" id="dashboard" aria-label="Aperçu réel de Pool Pilot dans Home Assistant">
+  <div class="ha-window" aria-label="Aperçu de Pool Pilot dans Home Assistant">
     <div class="ha-topbar">
-      <span class="ha-title">☰ &nbsp; Piscine</span>
-      <span>☀️ 21,5 °C &nbsp; ☁️ UV 6 &nbsp; ◷ 16:30</span>
+      <span aria-hidden="true">☰</span>
+      <strong>Home Assistant</strong>
+      <span class="ha-top-icons" aria-hidden="true">⌂　◉　▦　⚡　⋯</span>
     </div>
-    <div class="ha-body">
-      <aside class="ha-sidebar">
-        <strong>Vue d’ensemble</strong>
-        <span>Historique</span><span>Équipements</span><span>Entretien</span><span>Produits</span><span>Paramètres</span><span>Maintenance</span>
-        <span class="sidebar-spacer"></span><span>Mode Expert</span>
+
+    <div class="ha-layout">
+      <aside class="ha-sidebar" aria-label="Menu Home Assistant">
+        <strong>Aperçu</strong>
+        <span>Énergie</span>
+        <span>Carte</span>
+        <span>Journal</span>
+        <span>Historique</span>
+        <span>Médias</span>
+        <span>Listes de tâches</span>
+        <i></i>
+        <span>Paramètres</span>
+        <span>Notifications</span>
       </aside>
-      <div class="dashboard-frame">
-        <img src="{{ url('theme://images/pool-pilot-dashboard.png') }}" alt="Vraie carte Pool Pilot Dashboard">
-      </div>
+
+      <section class="ha-content">
+        <div class="ha-content-title">
+          <h2>Piscine</h2>
+          <span>Home Assistant</span>
+        </div>
+        <div class="dashboard-frame">
+          <img
+            src="{{ url('theme://images/pool-pilot-dashboard.png') }}"
+            alt="Vraie carte Pool Pilot Dashboard dans Home Assistant">
+        </div>
+      </section>
     </div>
   </div>
 </section>
 
-<section class="feature-strip" id="fonctionnalites">
-  <article><b>◷</b><div><h3>Filtration intelligente</h3><p>Pilotage automatique selon la température, la météo et vos règles.</p></div></article>
-  <article><b>💧</b><div><h3>Qualité de l’eau</h3><p>Suivi du pH et de l’ORP ou du chlore libre.</p></div></article>
-  <article><b>⚡</b><div><h3>Équipements</h3><p>Électrolyseur, PAC, volet et commandes auxiliaires.</p></div></article>
-  <article><b>🔔</b><div><h3>Entretien et alertes</h3><p>Recommandations, rappels et carnet d’entretien.</p></div></article>
-</section>
+<section class="features" id="fonctionnalites">
+  <header class="section-heading">
+    <span>FONCTIONNALITÉS</span>
+    <h2>Une seule interface pour comprendre et piloter votre bassin</h2>
+  </header>
 
-<section class="section cards-section" id="installation">
-  <div class="section-heading"><span>DÉCOUVRIR POOL PILOT</span><h2>Une intégration conçue pour votre installation</h2></div>
-  <div class="info-grid">
-    <article><h3>Installation simple</h3><ol><li>Ajouter le dépôt dans HACS</li><li>Installer l’intégration</li><li>Configurer les équipements</li><li>Ajouter la carte Dashboard</li></ol><a href="#documentation">Voir le guide d’installation →</a></article>
-    <article id="compatibilite"><h3>Compatibilité</h3><ul><li>Home Assistant</li><li>Poolex Aqualyser</li><li>Capteurs pH, ORP et chlore libre</li><li>PAC, électrolyseur, volet et auxiliaires</li></ul><a href="#documentation">Voir les équipements →</a></article>
-    <article><h3>Dashboard</h3><p>La carte Pool Pilot centralise les mesures, commandes, alertes et historiques dans Home Assistant.</p><a href="#dashboard">Voir la carte en grand →</a></article>
-    <article id="roadmap"><h3>Roadmap</h3><p>Le projet évolue avec de nouvelles fonctions, optimisations et compatibilités.</p><a href="#documentation">Voir la roadmap →</a></article>
+  <div class="feature-grid">
+    <article>
+      <b aria-hidden="true">💧</b>
+      <h3>Analyse de l’eau</h3>
+      <p>pH, ORP ou chlore libre, seuils, alertes et recommandations.</p>
+    </article>
+    <article>
+      <b aria-hidden="true">⚙️</b>
+      <h3>Filtration intelligente</h3>
+      <p>Durée recommandée, horaires et fonctionnement automatique.</p>
+    </article>
+    <article>
+      <b aria-hidden="true">🏊</b>
+      <h3>Équipements</h3>
+      <p>PAC, électrolyseur, volet, éclairage et équipements auxiliaires.</p>
+    </article>
+    <article>
+      <b aria-hidden="true">📊</b>
+      <h3>Historique</h3>
+      <p>Consultez les mesures sur 24 heures, 7 jours et 30 jours.</p>
+    </article>
+    <article>
+      <b aria-hidden="true">🧰</b>
+      <h3>Entretien</h3>
+      <p>Carnet, produits, interventions et rappels centralisés.</p>
+    </article>
+    <article>
+      <b aria-hidden="true">🔔</b>
+      <h3>Notifications</h3>
+      <p>Alertes et recommandations lorsque votre attention est nécessaire.</p>
+    </article>
   </div>
 </section>
-<div id="documentation"></div><div id="faq"></div>
+
+<section class="placeholder-section" id="installation">
+  <span>INSTALLATION</span>
+  <h2>Installation via HACS</h2>
+  <p>Le guide détaillé sera ajouté dans la prochaine version.</p>
+</section>
+
+<div id="documentation"></div>
+<div id="compatibilite"></div>
+<div id="roadmap"></div>
+<div id="faq"></div>
 {% endblock %}

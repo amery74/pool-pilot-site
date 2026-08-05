@@ -1,3 +1,8 @@
 {% extends 'partials/base.html.twig' %}
-"
-    "{% block content %}<article class="page-content">{{ page.content|raw }}</article>{% endblock %}
+
+{% block content %}
+<article class="standard-page">
+  <h1>{{ page.title }}</h1>
+  {{ page.content|raw }}
+</article>
+{% endblock %}
