@@ -1,0 +1,263 @@
+{% extends 'partials/base.html.twig' %}
+
+{% block content %}
+<section class="install-hero">
+  <div class="install-hero-inner">
+    <span class="eyebrow">GUIDE D’INSTALLATION</span>
+    <h1>Installer Pool Pilot<br><span>pas à pas.</span></h1>
+    <p>
+      Ce guide vous accompagne depuis l’ajout des dépôts HACS jusqu’à la première
+      configuration de Pool Pilot et de sa carte Dashboard.
+    </p>
+    <div class="install-hero-meta">
+      <span>Home Assistant</span>
+      <span>HACS requis</span>
+      <span>Environ 10 à 15 minutes</span>
+    </div>
+  </div>
+</section>
+
+<nav class="install-toc" aria-label="Sommaire du guide">
+  <a href="#prerequis">Prérequis</a>
+  <a href="#depots">Dépôts HACS</a>
+  <a href="#installer">Installation</a>
+  <a href="#configurer">Configuration</a>
+  <a href="#dashboard">Dashboard</a>
+  <a href="#verification">Vérification</a>
+  <a href="#decouverte">Découverte</a>
+  <a href="#depannage">Dépannage</a>
+</nav>
+
+<section class="install-section" id="prerequis">
+  <div class="install-section-heading">
+    <span>AVANT DE COMMENCER</span>
+    <h2>Prérequis</h2>
+    <p>Pool Pilot est une intégration personnalisée installée via HACS. Elle n’est pas native dans Home Assistant.</p>
+  </div>
+
+  <div class="requirements-grid">
+    <article><strong>Home Assistant</strong><p>Une instance Home Assistant fonctionnelle et accessible.</p></article>
+    <article><strong>HACS</strong><p>HACS doit être installé et configuré sur votre instance.</p></article>
+    <article><strong>Entités piscine</strong><p>Vos capteurs et équipements doivent déjà être disponibles dans Home Assistant.</p></article>
+  </div>
+
+  <aside class="doc-callout doc-callout-info">
+    <strong>À savoir</strong>
+    <p>Pool Pilot utilise les entités déjà créées par vos intégrations Home Assistant et ne communique pas directement avec le matériel.</p>
+  </aside>
+</section>
+
+<section class="install-section install-section-alt" id="depots">
+  <div class="install-section-heading">
+    <span>ÉTAPE 1</span>
+    <h2>Ajouter les dépôts personnalisés dans HACS</h2>
+    <p>L’intégration et la carte Dashboard sont distribuées dans deux dépôts distincts.</p>
+  </div>
+
+  <div class="install-step">
+    <div class="install-step-copy">
+      <b>1.1</b><h3>Ouvrir les dépôts personnalisés</h3>
+      <p>Dans HACS, ouvrez le menu en haut à droite, puis sélectionnez <strong>Dépôts personnalisés</strong>.</p>
+    </div>
+    <figure class="doc-shot doc-shot-landscape">
+      <a href="{{ url('theme://images/installation/01-hacs-menu.webp') }}" target="_blank">
+        <img src="{{ url('theme://images/installation/01-hacs-menu.webp') }}" alt="Menu HACS avec l’entrée Dépôts personnalisés" loading="lazy">
+      </a>
+      <figcaption>HACS → menu → Dépôts personnalisés</figcaption>
+    </figure>
+  </div>
+
+  <div class="install-step">
+    <div class="install-step-copy">
+      <b>1.2</b><h3>Ajouter le dépôt de l’intégration</h3>
+      <p>Ajoutez le dépôt suivant avec le type <strong>Intégration</strong> :</p>
+      <div class="copy-field"><code>https://github.com/amery74/ha-poolpilot</code></div>
+    </div>
+    <figure class="doc-shot doc-shot-landscape">
+      <a href="{{ url('theme://images/installation/02-ajout-depot-integration.webp') }}" target="_blank">
+        <img src="{{ url('theme://images/installation/02-ajout-depot-integration.webp') }}" alt="Ajout du dépôt de l’intégration Pool Pilot dans HACS" loading="lazy">
+      </a>
+      <figcaption>Type : Intégration</figcaption>
+    </figure>
+  </div>
+
+  <div class="install-step">
+    <div class="install-step-copy">
+      <b>1.3</b><h3>Ajouter le dépôt de la carte Dashboard</h3>
+      <p>Ajoutez ensuite le dépôt de la carte avec le type <strong>Tableau de bord</strong> :</p>
+      <div class="copy-field"><code>https://github.com/amery74/pool-pilot-dashboard</code></div>
+    </div>
+    <figure class="doc-shot doc-shot-landscape">
+      <a href="{{ url('theme://images/installation/03-ajout-depot-dashboard.webp') }}" target="_blank">
+        <img src="{{ url('theme://images/installation/03-ajout-depot-dashboard.webp') }}" alt="Ajout du dépôt Pool Pilot Dashboard dans HACS" loading="lazy">
+      </a>
+      <figcaption>Type : Tableau de bord</figcaption>
+    </figure>
+  </div>
+
+  <div class="install-step">
+    <div class="install-step-copy">
+      <b>1.4</b><h3>Vérifier les deux dépôts</h3>
+      <p>HACS doit afficher <strong>Pool Pilot</strong> et <strong>Pool Pilot Dashboard</strong>.</p>
+    </div>
+    <figure class="doc-shot doc-shot-landscape">
+      <a href="{{ url('theme://images/installation/04-depots-hacs-installes.webp') }}" target="_blank">
+        <img src="{{ url('theme://images/installation/04-depots-hacs-installes.webp') }}" alt="Pool Pilot et Pool Pilot Dashboard visibles dans HACS" loading="lazy">
+      </a>
+      <figcaption>Les deux dépôts sont disponibles</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="install-section" id="installer">
+  <div class="install-section-heading">
+    <span>ÉTAPE 2</span>
+    <h2>Installer l’intégration Pool Pilot</h2>
+    <p>Installez Pool Pilot depuis HACS, puis redémarrez Home Assistant.</p>
+  </div>
+
+  <div class="install-step">
+    <div class="install-step-copy">
+      <b>2.1</b><h3>Ouvrir Pool Pilot dans HACS</h3>
+      <p>Recherchez <strong>Pool Pilot</strong>, ouvrez sa fiche et téléchargez la dernière version.</p>
+    </div>
+    <figure class="doc-shot">
+      <a href="{{ url('theme://images/installation/05-integration-pool-pilot.webp') }}" target="_blank">
+        <img src="{{ url('theme://images/installation/05-integration-pool-pilot.webp') }}" alt="Fiche Pool Pilot dans HACS" loading="lazy">
+      </a>
+      <figcaption>Pool Pilot dans HACS</figcaption>
+    </figure>
+  </div>
+
+  <aside class="doc-callout doc-callout-warning">
+    <strong>Redémarrage requis</strong>
+    <p>Après l’installation ou une mise à jour de l’intégration, redémarrez Home Assistant avant de poursuivre.</p>
+  </aside>
+</section>
+
+<section class="install-section install-section-alt" id="configurer">
+  <div class="install-section-heading">
+    <span>ÉTAPE 3</span>
+    <h2>Ajouter et configurer l’intégration</h2>
+    <p>Rendez-vous dans Paramètres → Appareils et services → Ajouter une intégration.</p>
+  </div>
+
+  <div class="install-step">
+    <div class="install-step-copy">
+      <b>3.1</b><h3>Créer la piscine</h3>
+      <p>Renseignez le nom de la piscine, son volume, le type de traitement et le revêtement.</p>
+    </div>
+    <figure class="doc-shot">
+      <a href="{{ url('theme://images/installation/06-configuration-generale.webp') }}" target="_blank">
+        <img src="{{ url('theme://images/installation/06-configuration-generale.webp') }}" alt="Configuration générale de Pool Pilot" loading="lazy">
+      </a>
+      <figcaption>Configuration générale du bassin</figcaption>
+    </figure>
+  </div>
+
+  <div class="install-step">
+    <div class="install-step-copy">
+      <b>3.2</b><h3>Régler les contrôles</h3>
+      <p>Configurez les consignes, les durées de filtration, l’heure centrale et les seuils d’alerte.</p>
+    </div>
+    <figure class="doc-shot">
+      <a href="{{ url('theme://images/installation/07-controles-pool-pilot.webp') }}" target="_blank">
+        <img src="{{ url('theme://images/installation/07-controles-pool-pilot.webp') }}" alt="Contrôles et réglages Pool Pilot" loading="lazy">
+      </a>
+      <figcaption>Consignes et paramètres de fonctionnement</figcaption>
+    </figure>
+  </div>
+
+  <div class="install-step">
+    <div class="install-step-copy">
+      <b>3.3</b><h3>Contrôler les capteurs créés</h3>
+      <p>Pool Pilot crée les capteurs nécessaires aux mesures, alertes, recommandations et automatismes.</p>
+    </div>
+    <div class="doc-shot-pair">
+      <figure class="doc-shot"><a href="{{ url('theme://images/installation/08-capteurs-pool-pilot.webp') }}" target="_blank"><img src="{{ url('theme://images/installation/08-capteurs-pool-pilot.webp') }}" alt="Première partie des capteurs Pool Pilot" loading="lazy"></a></figure>
+      <figure class="doc-shot"><a href="{{ url('theme://images/installation/09-capteurs-suite.webp') }}" target="_blank"><img src="{{ url('theme://images/installation/09-capteurs-suite.webp') }}" alt="Suite des capteurs Pool Pilot" loading="lazy"></a></figure>
+    </div>
+  </div>
+</section>
+
+<section class="install-section" id="dashboard">
+  <div class="install-section-heading">
+    <span>ÉTAPE 4</span>
+    <h2>Installer et ajouter Pool Pilot Dashboard</h2>
+    <p>La carte Dashboard se télécharge séparément depuis HACS.</p>
+  </div>
+
+  <div class="install-checklist">
+    <div><b>1</b><span>Ouvrez Pool Pilot Dashboard dans HACS.</span></div>
+    <div><b>2</b><span>Téléchargez la dernière version.</span></div>
+    <div><b>3</b><span>Actualisez le navigateur si nécessaire.</span></div>
+    <div><b>4</b><span>Ajoutez une carte dans votre tableau de bord Lovelace.</span></div>
+    <div><b>5</b><span>Sélectionnez Pool Pilot Dashboard et votre piscine.</span></div>
+  </div>
+
+  <div class="dashboard-results">
+    <figure class="doc-shot"><a href="{{ url('theme://images/installation/10-dashboard-analyse.webp') }}" target="_blank"><img src="{{ url('theme://images/installation/10-dashboard-analyse.webp') }}" alt="Vue Analyse de Pool Pilot Dashboard" loading="lazy"></a><figcaption>Vue Analyse</figcaption></figure>
+    <figure class="doc-shot"><a href="{{ url('theme://images/installation/11-dashboard-resultat.webp') }}" target="_blank"><img src="{{ url('theme://images/installation/11-dashboard-resultat.webp') }}" alt="Résultat final de Pool Pilot Dashboard" loading="lazy"></a><figcaption>La carte opérationnelle</figcaption></figure>
+  </div>
+</section>
+
+<section class="install-section install-section-alt" id="verification">
+  <div class="install-section-heading"><span>ÉTAPE 5</span><h2>Vérifier le bon fonctionnement</h2></div>
+
+  <div class="verification-grid">
+    <article><span>01</span><h3>Mesures</h3><p>La température, le pH et la mesure ORP ou chlore libre doivent s’afficher.</p></article>
+    <article><span>02</span><h3>Équipements</h3><p>Testez les commandes manuelles avant d’activer les automatismes.</p></article>
+    <article><span>03</span><h3>Filtration AUTO</h3><p>Vérifiez la durée recommandée, la planification et l’état du cycle.</p></article>
+    <article><span>04</span><h3>Notifications</h3><p>Choisissez le service de notification utilisé pour les alertes et résumés.</p></article>
+  </div>
+
+  <aside class="doc-callout doc-callout-warning">
+    <strong>Première mise en service</strong>
+    <p>Testez chaque commande manuellement et vérifiez les entités sélectionnées avant d’activer le pilotage automatique.</p>
+  </aside>
+</section>
+
+<section class="install-section" id="decouverte">
+  <div class="install-section-heading">
+    <span>APRÈS L’INSTALLATION</span>
+    <h2>Découvrez les fonctions disponibles</h2>
+    <p>Les captures fournies présentent les principaux écrans de Pool Pilot.</p>
+  </div>
+
+  <div class="screen-gallery">
+    {% set gallery = [
+      ['12-carnet-entretien.webp', 'Carnet d’entretien'],
+      ['13-donnees-brutes.webp', 'Données brutes'],
+      ['14-test-bandelette-formulaire.webp', 'Saisie d’un test bandelette'],
+      ['15-test-bandelette-resultat.webp', 'Résultat du test bandelette'],
+      ['16-mode-expert.webp', 'Mode Expert'],
+      ['17-balance-taylor-bilan.webp', 'Balance de Taylor'],
+      ['18-balance-taylor-details.webp', 'Détails de la balance'],
+      ['19-parametres.webp', 'Paramètres'],
+      ['20-notifications.webp', 'Notifications'],
+      ['21-controles-equipements.webp', 'Contrôle des équipements'],
+      ['22-pool-house-produits.webp', 'Gestion des produits'],
+      ['23-alerte-recommandation.webp', 'Alerte et recommandation']
+    ] %}
+    {% for shot in gallery %}
+    <figure><a href="{{ url('theme://images/installation/' ~ shot[0]) }}" target="_blank"><img src="{{ url('theme://images/installation/' ~ shot[0]) }}" alt="{{ shot[1] }}" loading="lazy"></a><figcaption>{{ shot[1] }}</figcaption></figure>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="install-section install-section-alt" id="depannage">
+  <div class="install-section-heading"><span>DÉPANNAGE RAPIDE</span><h2>Les vérifications les plus courantes</h2></div>
+  <div class="troubleshooting-list">
+    <details><summary>Pool Pilot n’apparaît pas dans les intégrations</summary><p>Vérifiez l’installation HACS, puis redémarrez complètement Home Assistant.</p></details>
+    <details><summary>La carte Dashboard n’apparaît pas dans Lovelace</summary><p>Actualisez le navigateur et vérifiez que la ressource HACS est chargée.</p></details>
+    <details><summary>Une mesure reste indisponible</summary><p>Vérifiez que l’entité source existe et renvoie une valeur numérique avec la bonne unité.</p></details>
+    <details><summary>Un équipement ne répond pas</summary><p>Testez d’abord son entité directement dans Home Assistant.</p></details>
+    <details><summary>Les styles du site ne se mettent pas à jour</summary><p>Videz le cache Grav avec <code>php bin/grav clearcache</code>, puis rechargez Safari.</p></details>
+  </div>
+</section>
+
+<section class="install-final-cta">
+  <div><h2>Pool Pilot est installé ?</h2><p>Découvrez maintenant toutes les fonctions disponibles.</p></div>
+  <a class="button button-light" href="{{ base_url_absolute }}/fonctionnalites">Voir les fonctionnalités</a>
+</section>
+{% endblock %}
