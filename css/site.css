@@ -901,3 +901,47 @@ img{max-width:100%}
     padding:28px;
   }
 }
+
+
+/* Pool Pilot v0.3.2 — correction capture Dashboard sur mobile */
+.dashboard-showcase-image{
+  width:100%;
+  max-width:980px;
+  margin:0 auto;
+  overflow:hidden;
+}
+
+.dashboard-showcase-image img{
+  display:block;
+  width:100%;
+  height:auto;
+  max-height:620px;
+  object-fit:cover;
+  object-position:top center;
+}
+
+@media(max-width:760px){
+  .dashboard-showcase-image{
+    max-width:520px;
+    border-radius:15px;
+  }
+
+  .dashboard-showcase-image img{
+    width:100%;
+    height:520px;
+    max-height:520px;
+    object-fit:cover;
+    object-position:top center;
+  }
+}
+
+@media(max-width:430px){
+  .dashboard-showcase-image{
+    max-width:100%;
+  }
+
+  .dashboard-showcase-image img{
+    height:460px;
+    max-height:460px;
+  }
+}
