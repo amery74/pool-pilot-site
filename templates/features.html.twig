@@ -1,0 +1,309 @@
+{% extends 'partials/base.html.twig' %}
+
+{% block content %}
+<section class="page-hero page-hero-features">
+  <div class="page-hero-inner">
+    <span class="eyebrow">FONCTIONNALITÉS</span>
+    <h1>Tout Pool Pilot,<br><span>fonction par fonction.</span></h1>
+    <p>
+      Découvrez en détail les outils disponibles pour surveiller l’eau,
+      automatiser la filtration, piloter les équipements et simplifier l’entretien.
+    </p>
+  </div>
+</section>
+
+<section class="feature-navigation">
+  <a href="#qualite-eau">Qualité de l’eau</a>
+  <a href="#filtration">Filtration</a>
+  <a href="#pac">Pompe à chaleur</a>
+  <a href="#electrolyseur">Électrolyseur</a>
+  <a href="#maintenance">Maintenance</a>
+  <a href="#entretien">Entretien</a>
+  <a href="#produits">Produits</a>
+  <a href="#meteo">Météo</a>
+  <a href="#historique">Historique</a>
+  <a href="#notifications">Notifications</a>
+  <a href="#dashboard">Dashboard</a>
+  <a href="#avance">Mode expert</a>
+</section>
+
+<section class="feature-detail" id="qualite-eau">
+  <div class="feature-detail-copy">
+    <span class="feature-kicker">01 · QUALITÉ DE L’EAU</span>
+    <h2>Surveillez les paramètres essentiels de votre bassin</h2>
+    <p>
+      Pool Pilot centralise les mesures provenant de vos capteurs et les présente
+      dans une seule interface. Vous pouvez choisir entre une mesure ORP ou une
+      mesure de chlore libre selon votre installation.
+    </p>
+    <ul>
+      <li>Suivi du pH</li>
+      <li>Choix ORP / Redox ou chlore libre</li>
+      <li>Température de l’eau</li>
+      <li>État des valeurs et seuils personnalisés</li>
+      <li>Recommandations adaptées aux mesures</li>
+      <li>Alertes lorsque votre attention est nécessaire</li>
+    </ul>
+  </div>
+  <div class="feature-detail-card">
+    <strong>Ce que l’utilisateur gagne</strong>
+    <p>Une lecture rapide de l’état de l’eau et des actions à entreprendre.</p>
+  </div>
+</section>
+
+<section class="feature-detail feature-detail-alt" id="filtration">
+  <div class="feature-detail-copy">
+    <span class="feature-kicker">02 · FILTRATION INTELLIGENTE</span>
+    <h2>Automatisez la filtration sans perdre le contrôle</h2>
+    <p>
+      Pool Pilot calcule une durée recommandée et organise les cycles selon vos
+      préférences horaires. Le mode automatique peut fonctionner autour d’une
+      heure cible ou dans une fenêtre minimale et maximale.
+    </p>
+    <ul>
+      <li>Calcul de durée recommandée</li>
+      <li>Mode automatique quotidien</li>
+      <li>Démarrage manuel à tout moment</li>
+      <li>Fenêtre horaire minimale et maximale</li>
+      <li>Affichage du cycle du jour</li>
+      <li>Commande manuelle ON / OFF séparée du mode AUTO</li>
+    </ul>
+  </div>
+  <div class="feature-detail-card">
+    <strong>Souplesse</strong>
+    <p>Vous conservez une commande manuelle tout en profitant d’un programme automatique.</p>
+  </div>
+</section>
+
+<section class="feature-detail" id="pac">
+  <div class="feature-detail-copy">
+    <span class="feature-kicker">03 · POMPE À CHALEUR</span>
+    <h2>Pilotez le chauffage directement depuis Pool Pilot</h2>
+    <p>
+      Lorsque votre pompe à chaleur est intégrée à Home Assistant, Pool Pilot
+      regroupe les commandes utiles dans la même carte.
+    </p>
+    <ul>
+      <li>Affichage de la température de l’eau</li>
+      <li>Réglage de la consigne</li>
+      <li>Mode chauffage</li>
+      <li>Mode refroidissement</li>
+      <li>Mode automatique</li>
+      <li>Arrêt de la PAC</li>
+    </ul>
+  </div>
+  <div class="feature-detail-card">
+    <strong>Confort</strong>
+    <p>Les réglages de température restent accessibles sans quitter le dashboard piscine.</p>
+  </div>
+</section>
+
+<section class="feature-detail feature-detail-alt" id="electrolyseur">
+  <div class="feature-detail-copy">
+    <span class="feature-kicker">04 · ÉLECTROLYSEUR</span>
+    <h2>Adaptez la production de désinfectant à votre installation</h2>
+    <p>
+      Pool Pilot prend en charge une gestion simple ou avancée de l’électrolyseur,
+      selon les entités disponibles dans Home Assistant.
+    </p>
+    <ul>
+      <li>Activation et arrêt</li>
+      <li>Réglage du pourcentage de production</li>
+      <li>Mode Boost facultatif</li>
+      <li>Gestion simple ou avancée</li>
+      <li>Compatibilité avec le suivi ORP ou chlore libre</li>
+    </ul>
+  </div>
+  <div class="feature-detail-card">
+    <strong>Adaptable</strong>
+    <p>Le fonctionnement s’ajuste aux capacités réelles de votre électrolyseur.</p>
+  </div>
+</section>
+
+<section class="feature-detail" id="maintenance">
+  <div class="feature-detail-copy">
+    <span class="feature-kicker">05 · MODE MAINTENANCE</span>
+    <h2>Intervenez sur la piscine sans redémarrage automatique</h2>
+    <p>
+      Le mode Maintenance suspend les automatismes Pool Pilot afin de laisser
+      le contrôle entièrement manuel pendant une intervention.
+    </p>
+    <ul>
+      <li>Suspension des actions automatiques</li>
+      <li>Empêche le redémarrage automatique de la filtration</li>
+      <li>Suspension du pilotage de la PAC</li>
+      <li>Suspension du pilotage de l’électrolyseur et des pompes doseuses</li>
+      <li>Conservation de l’enregistrement des mesures</li>
+      <li>Retour simple au fonctionnement normal</li>
+    </ul>
+  </div>
+  <div class="feature-detail-card">
+    <strong>Sécurité d’intervention</strong>
+    <p>Les équipements restent sous votre contrôle pendant la maintenance.</p>
+  </div>
+</section>
+
+<section class="feature-detail feature-detail-alt" id="entretien">
+  <div class="feature-detail-copy">
+    <span class="feature-kicker">06 · CARNET D’ENTRETIEN</span>
+    <h2>Gardez une trace claire des interventions</h2>
+    <p>
+      Le carnet d’entretien rassemble les actions réalisées sur la piscine
+      dans une chronologie facile à consulter.
+    </p>
+    <ul>
+      <li>Ajout manuel d’une intervention</li>
+      <li>Date et heure de l’action</li>
+      <li>Type d’entretien</li>
+      <li>Commentaire libre</li>
+      <li>Historique chronologique</li>
+    </ul>
+  </div>
+  <div class="feature-detail-card">
+    <strong>Mémoire du bassin</strong>
+    <p>Retrouvez ce qui a été fait sans dépendre de notes séparées.</p>
+  </div>
+</section>
+
+<section class="feature-detail" id="produits">
+  <div class="feature-detail-copy">
+    <span class="feature-kicker">07 · GESTION DES PRODUITS</span>
+    <h2>Centralisez le stock des produits d’entretien</h2>
+    <p>
+      Pool Pilot permet de suivre les produits utilisés et les quantités disponibles
+      afin de mieux anticiper les besoins.
+    </p>
+    <ul>
+      <li>Ajout, modification et suppression d’un produit</li>
+      <li>Suivi de la quantité disponible</li>
+      <li>Décompte lors d’une utilisation</li>
+      <li>Produits pH, chlore et traitements divers</li>
+      <li>Base pour les recommandations de dosage</li>
+    </ul>
+  </div>
+  <div class="feature-detail-card">
+    <strong>Anticipation</strong>
+    <p>Vous savez ce qu’il reste avant de devoir racheter un produit.</p>
+  </div>
+</section>
+
+<section class="feature-detail feature-detail-alt" id="meteo">
+  <div class="feature-detail-copy">
+    <span class="feature-kicker">08 · MÉTÉO, UV ET VIGILANCES</span>
+    <h2>Intégrez les conditions extérieures au pilotage</h2>
+    <p>
+      Les informations météorologiques peuvent être affichées dans la carte pour
+      apporter du contexte aux mesures et aux décisions de filtration.
+    </p>
+    <ul>
+      <li>Météo actuelle</li>
+      <li>Prévisions</li>
+      <li>Indice UV</li>
+      <li>Vigilances Météo-France</li>
+      <li>Vent, orage, pluie-inondation, canicule, neige-verglas</li>
+    </ul>
+  </div>
+  <div class="feature-detail-card">
+    <strong>Contexte</strong>
+    <p>Les conditions extérieures sont visibles au même endroit que les mesures du bassin.</p>
+  </div>
+</section>
+
+<section class="feature-detail" id="historique">
+  <div class="feature-detail-copy">
+    <span class="feature-kicker">09 · HISTORIQUE ET TENDANCES</span>
+    <h2>Comprenez l’évolution des paramètres</h2>
+    <p>
+      Les historiques permettent d’observer les variations et de vérifier
+      l’effet d’une correction ou d’un changement de fonctionnement.
+    </p>
+    <ul>
+      <li>Vue 24 heures</li>
+      <li>Vue 7 jours</li>
+      <li>Vue 30 jours</li>
+      <li>Mesures principales regroupées</li>
+      <li>Lecture des tendances</li>
+    </ul>
+  </div>
+  <div class="feature-detail-card">
+    <strong>Analyse</strong>
+    <p>Vous ne voyez plus seulement une valeur instantanée, mais son évolution.</p>
+  </div>
+</section>
+
+<section class="feature-detail feature-detail-alt" id="notifications">
+  <div class="feature-detail-copy">
+    <span class="feature-kicker">10 · ALERTES ET NOTIFICATIONS</span>
+    <h2>Recevez les informations utiles au bon moment</h2>
+    <p>
+      Pool Pilot peut notifier les anomalies et les actions à effectuer,
+      sans multiplier les informations inutiles.
+    </p>
+    <ul>
+      <li>Résumé journalier</li>
+      <li>Alertes liées aux mesures</li>
+      <li>Rappels d’entretien</li>
+      <li>Recommandations de correction</li>
+      <li>Possibilité de reporter une alerte</li>
+      <li>Validation d’une action réalisée</li>
+    </ul>
+  </div>
+  <div class="feature-detail-card">
+    <strong>Priorisation</strong>
+    <p>Les informations importantes sont mises en avant sans surcharger l’utilisateur.</p>
+  </div>
+</section>
+
+<section class="feature-detail" id="dashboard">
+  <div class="feature-detail-copy">
+    <span class="feature-kicker">11 · POOL PILOT DASHBOARD</span>
+    <h2>Une carte unique pour toute la piscine</h2>
+    <p>
+      Pool Pilot Dashboard rassemble les mesures, les équipements, les alertes
+      et les commandes dans une seule carte Lovelace.
+    </p>
+    <ul>
+      <li>Interface adaptée au mobile</li>
+      <li>Mode simple et mode expert</li>
+      <li>Accès direct aux commandes</li>
+      <li>Affichage des alertes et recommandations</li>
+      <li>Historique intégré</li>
+      <li>Organisation cohérente avec Home Assistant</li>
+    </ul>
+  </div>
+  <div class="feature-detail-card feature-dashboard-preview">
+    <img src="{{ url('theme://images/pool-pilot-dashboard.png') }}" alt="Pool Pilot Dashboard">
+  </div>
+</section>
+
+<section class="feature-detail feature-detail-alt" id="avance">
+  <div class="feature-detail-copy">
+    <span class="feature-kicker">12 · PARAMÈTRES AVANCÉS</span>
+    <h2>Affinez Pool Pilot selon votre bassin</h2>
+    <p>
+      Le mode expert permet d’accéder à des informations et réglages supplémentaires
+      sans alourdir l’interface destinée à un usage quotidien.
+    </p>
+    <ul>
+      <li>Saisie du TAC</li>
+      <li>Saisie du TH</li>
+      <li>Saisie du stabilisant</li>
+      <li>Accès au mode Maintenance</li>
+      <li>Accès au carnet d’entretien</li>
+      <li>Réglages complémentaires selon les équipements</li>
+    </ul>
+  </div>
+  <div class="feature-detail-card">
+    <strong>Deux niveaux de lecture</strong>
+    <p>Une interface simple au quotidien et des réglages détaillés lorsque nécessaire.</p>
+  </div>
+</section>
+
+<section class="features-cta">
+  <div>
+    <h2>Vous souhaitez installer Pool Pilot ?</h2>
+    <p>Consultez maintenant le guide d’installation via HACS.</p>
+  </div>
+  <a class="button button-light" href="{{ base_url_absolute }}/installation">Voir l’installation</a>
+</section>
+{% endblock %}
