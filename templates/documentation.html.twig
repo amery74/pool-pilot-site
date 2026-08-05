@@ -1,0 +1,350 @@
+{% extends 'partials/base.html.twig' %}
+
+{% block content %}
+<section class="docs-hero">
+  <div class="docs-hero-inner">
+    <span class="eyebrow">DOCUMENTATION</span>
+    <h1>Utiliser Pool Pilot<br><span>au quotidien.</span></h1>
+    <p>
+      Cette page explique comment lire la carte, comprendre les automatismes,
+      utiliser les différents menus et interpréter les alertes.
+    </p>
+    <a class="button button-light" href="{{ base_url_absolute }}/installation">
+      Vous n’avez pas encore installé Pool Pilot ?
+    </a>
+  </div>
+</section>
+
+<section class="docs-help-center">
+  <a href="#decouvrir">
+    <strong>Je découvre Pool Pilot</strong>
+    <span>Comprendre l’organisation de la carte</span>
+  </a>
+  <a href="#fonctions">
+    <strong>Je veux comprendre une fonction</strong>
+    <span>Filtration, eau, historique, maintenance…</span>
+  </a>
+  <a href="#aide">
+    <strong>J’ai un problème</strong>
+    <span>Conseils, FAQ et vérifications</span>
+  </a>
+</section>
+
+<nav class="docs-toc" aria-label="Sommaire de la documentation">
+  <a href="#decouvrir">Découvrir</a>
+  <a href="#dashboard">Dashboard</a>
+  <a href="#fonctions">Fonctions</a>
+  <a href="#automatismes">Automatismes</a>
+  <a href="#conseils">Conseils</a>
+  <a href="#aide">FAQ</a>
+</nav>
+
+<section class="docs-section" id="decouvrir">
+  <div class="docs-heading">
+    <span>PREMIERS REPÈRES</span>
+    <h2>Comment est organisé Pool Pilot ?</h2>
+    <p>
+      Pool Pilot s’utilise directement dans Home Assistant. La carte propose une vue principale
+      et plusieurs écrans spécialisés accessibles depuis le menu.
+    </p>
+  </div>
+
+  <div class="docs-intro-grid">
+    <figure class="docs-shot">
+      <a href="{{ url('theme://images/documentation/01-menu.webp') }}" target="_blank">
+        <img src="{{ url('theme://images/documentation/01-menu.webp') }}" alt="Menu principal de Pool Pilot" loading="lazy">
+      </a>
+      <figcaption>Le menu principal de Pool Pilot</figcaption>
+    </figure>
+
+    <div class="docs-intro-copy">
+      <h3>Les principaux espaces</h3>
+      <ul>
+        <li><strong>Historique :</strong> suivre les tendances sur 24 h, 7 jours ou 30 jours.</li>
+        <li><strong>Carnet d’entretien :</strong> retrouver les interventions réalisées.</li>
+        <li><strong>Pool House :</strong> gérer les produits et les équipements.</li>
+        <li><strong>Mode Expert :</strong> accéder aux mesures et réglages avancés.</li>
+        <li><strong>Balance de Taylor :</strong> interpréter l’équilibre global de l’eau.</li>
+        <li><strong>Paramètres :</strong> adapter Pool Pilot à votre bassin.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="docs-section docs-section-alt" id="dashboard">
+  <div class="docs-heading">
+    <span>LE DASHBOARD</span>
+    <h2>Une vue unique pour comprendre l’état du bassin</h2>
+    <p>
+      La page principale rassemble les mesures de l’eau, les alertes, la filtration
+      et les équipements dans une seule interface.
+    </p>
+  </div>
+
+  <div class="docs-dashboard-grid">
+    <article>
+      <span>01</span>
+      <h3>Mesures</h3>
+      <p>Température, pH et mesure ORP ou chlore libre.</p>
+    </article>
+    <article>
+      <span>02</span>
+      <h3>Alertes</h3>
+      <p>Les anomalies et recommandations sont affichées immédiatement.</p>
+    </article>
+    <article>
+      <span>03</span>
+      <h3>Équipements</h3>
+      <p>Filtration, PAC, électrolyseur, volet et autres équipements disponibles.</p>
+    </article>
+    <article>
+      <span>04</span>
+      <h3>Actions</h3>
+      <p>Accès aux contrôles manuels, au mode AUTO et aux paramètres.</p>
+    </article>
+  </div>
+</section>
+
+<section class="docs-section" id="fonctions">
+  <div class="docs-heading">
+    <span>FONCTIONS PRINCIPALES</span>
+    <h2>Comprendre les réglages et les écrans</h2>
+  </div>
+
+  <article class="docs-feature-row">
+    <div class="docs-feature-copy">
+      <span class="docs-kicker">FILTRATION</span>
+      <h3>Planifier la filtration automatique</h3>
+      <p>
+        Pool Pilot peut centrer la filtration autour d’une heure ou la limiter à une
+        fenêtre horaire. Le coefficient de filtration et les durées minimale et maximale
+        encadrent le calcul automatique.
+      </p>
+      <ul>
+        <li>Heure centrale de filtration</li>
+        <li>Coefficient de filtration</li>
+        <li>Durée minimale et maximale</li>
+        <li>Commande manuelle indépendante du mode AUTO</li>
+      </ul>
+    </div>
+    <figure class="docs-shot">
+      <a href="{{ url('theme://images/documentation/02-filtration.webp') }}" target="_blank">
+        <img src="{{ url('theme://images/documentation/02-filtration.webp') }}" alt="Réglages de filtration automatique" loading="lazy">
+      </a>
+    </figure>
+  </article>
+
+  <article class="docs-feature-row docs-feature-row-alt">
+    <div class="docs-feature-copy">
+      <span class="docs-kicker">QUALITÉ DE L’EAU</span>
+      <h3>Définir les valeurs cibles</h3>
+      <p>
+        Les consignes servent à interpréter les mesures et à générer les recommandations.
+        Selon votre configuration, Pool Pilot utilise le chlore libre ou l’ORP.
+      </p>
+      <ul>
+        <li>pH cible</li>
+        <li>Chlore libre cible ou ORP cible</li>
+        <li>Seuils d’alerte personnalisés</li>
+        <li>Recommandations adaptées aux mesures</li>
+      </ul>
+    </div>
+    <figure class="docs-shot">
+      <a href="{{ url('theme://images/documentation/03-qualite-eau.webp') }}" target="_blank">
+        <img src="{{ url('theme://images/documentation/03-qualite-eau.webp') }}" alt="Réglages de qualité d’eau" loading="lazy">
+      </a>
+    </figure>
+  </article>
+
+  <article class="docs-feature-row">
+    <div class="docs-feature-copy">
+      <span class="docs-kicker">ALERTES</span>
+      <h3>Adapter les seuils à votre piscine</h3>
+      <p>
+        Les seuils permettent de décider à partir de quand une situation doit être signalée :
+        eau trop froide, trop chaude ou risque d’algues.
+      </p>
+    </div>
+    <figure class="docs-shot">
+      <a href="{{ url('theme://images/documentation/04-alertes.webp') }}" target="_blank">
+        <img src="{{ url('theme://images/documentation/04-alertes.webp') }}" alt="Réglages des alertes Pool Pilot" loading="lazy">
+      </a>
+    </figure>
+  </article>
+
+  <article class="docs-feature-row docs-feature-row-alt">
+    <div class="docs-feature-copy">
+      <span class="docs-kicker">NOTIFICATIONS</span>
+      <h3>Choisir ce que Pool Pilot doit vous envoyer</h3>
+      <p>
+        Vous pouvez sélectionner le service Home Assistant utilisé et les catégories
+        de notifications à recevoir.
+      </p>
+      <ul>
+        <li>Alertes Pool Pilot</li>
+        <li>Recommandations produits</li>
+        <li>Filtration automatique</li>
+        <li>Stock et batterie faibles</li>
+        <li>Rappels bandelettes</li>
+        <li>Résumé quotidien</li>
+      </ul>
+    </div>
+    <figure class="docs-shot docs-shot-tall">
+      <a href="{{ url('theme://images/documentation/05-notifications.webp') }}" target="_blank">
+        <img src="{{ url('theme://images/documentation/05-notifications.webp') }}" alt="Réglages des notifications Pool Pilot" loading="lazy">
+      </a>
+    </figure>
+  </article>
+
+  <article class="docs-feature-row">
+    <div class="docs-feature-copy">
+      <span class="docs-kicker">HISTORIQUE</span>
+      <h3>Lire les tendances plutôt qu’une valeur isolée</h3>
+      <p>
+        L’historique permet de suivre l’évolution des mesures et de vérifier l’effet
+        d’une correction ou d’un changement de fonctionnement.
+      </p>
+      <ul>
+        <li>Vue 24 heures</li>
+        <li>Vue 7 jours</li>
+        <li>Vue 30 jours</li>
+        <li>Température, pH et désinfection</li>
+      </ul>
+    </div>
+    <figure class="docs-shot docs-shot-tall">
+      <a href="{{ url('theme://images/documentation/06-historique.webp') }}" target="_blank">
+        <img src="{{ url('theme://images/documentation/06-historique.webp') }}" alt="Historique Pool Pilot sur 30 jours" loading="lazy">
+      </a>
+    </figure>
+  </article>
+
+  <article class="docs-feature-row docs-feature-row-alt">
+    <div class="docs-feature-copy">
+      <span class="docs-kicker">MODE MAINTENANCE</span>
+      <h3>Suspendre les automatismes pendant une intervention</h3>
+      <p>
+        Le mode Maintenance empêche Pool Pilot de relancer automatiquement les équipements
+        et laisse le contrôle manuel disponible.
+      </p>
+      <ul>
+        <li>Automatismes suspendus</li>
+        <li>Commandes manuelles conservées</li>
+        <li>Mesures toujours enregistrées</li>
+        <li>Retour simple au fonctionnement normal</li>
+      </ul>
+    </div>
+    <div class="docs-shot-stack">
+      <figure class="docs-shot">
+        <a href="{{ url('theme://images/documentation/07-maintenance-banniere.webp') }}" target="_blank">
+          <img src="{{ url('theme://images/documentation/07-maintenance-banniere.webp') }}" alt="Bannière du mode Maintenance" loading="lazy">
+        </a>
+      </figure>
+      <figure class="docs-shot">
+        <a href="{{ url('theme://images/documentation/08-maintenance-action.webp') }}" target="_blank">
+          <img src="{{ url('theme://images/documentation/08-maintenance-action.webp') }}" alt="Activation du mode Maintenance" loading="lazy">
+        </a>
+      </figure>
+    </div>
+  </article>
+</section>
+
+<section class="docs-section docs-section-alt" id="automatismes">
+  <div class="docs-heading">
+    <span>COMPRENDRE LES AUTOMATISMES</span>
+    <h2>Pourquoi Pool Pilot agit-il ?</h2>
+  </div>
+
+  <div class="docs-automation-grid">
+    <article>
+      <h3>Filtration</h3>
+      <p>La durée est calculée à partir des paramètres configurés et encadrée par vos limites.</p>
+    </article>
+    <article>
+      <h3>Recommandations</h3>
+      <p>Elles apparaissent lorsque les mesures sortent des valeurs cibles ou nécessitent une action.</p>
+    </article>
+    <article>
+      <h3>Notifications</h3>
+      <p>Elles reprennent les alertes, rappels et résumés selon les options activées.</p>
+    </article>
+    <article>
+      <h3>Maintenance</h3>
+      <p>Ce mode prend toujours la priorité sur les automatismes pour sécuriser l’intervention.</p>
+    </article>
+  </div>
+
+  <div class="docs-summary-example">
+    <div>
+      <span class="docs-kicker">RÉSUMÉ QUOTIDIEN</span>
+      <h3>Un point rapide sur l’état de la piscine</h3>
+      <p>
+        Le résumé quotidien regroupe la qualité de l’eau, la filtration recommandée
+        et l’action la plus importante à réaliser.
+      </p>
+    </div>
+    <figure class="docs-shot">
+      <a href="{{ url('theme://images/documentation/09-resume-quotidien.webp') }}" target="_blank">
+        <img src="{{ url('theme://images/documentation/09-resume-quotidien.webp') }}" alt="Résumé quotidien Pool Pilot" loading="lazy">
+      </a>
+    </figure>
+  </div>
+</section>
+
+<section class="docs-section" id="conseils">
+  <div class="docs-heading">
+    <span>BONNES PRATIQUES</span>
+    <h2>Utiliser Pool Pilot efficacement</h2>
+  </div>
+
+  <div class="docs-tips-grid">
+    <article><strong>Vérifiez les mesures</strong><p>Une recommandation n’est pertinente que si les capteurs sont fiables et étalonnés.</p></article>
+    <article><strong>Faites des tests bandelettes</strong><p>Ils complètent les sondes et permettent de renseigner TAC, TH et stabilisant.</p></article>
+    <article><strong>Testez les commandes</strong><p>Avant d’activer l’automatisation, contrôlez chaque équipement manuellement.</p></article>
+    <article><strong>Utilisez Maintenance</strong><p>Activez-le avant toute intervention sur la filtration ou le local technique.</p></article>
+    <article><strong>Lisez la tendance</strong><p>Consultez l’historique avant de corriger une valeur isolée.</p></article>
+    <article><strong>Validez les recommandations</strong><p>Contrôlez toujours le produit, sa concentration et le volume du bassin.</p></article>
+  </div>
+</section>
+
+<section class="docs-section docs-section-alt" id="aide">
+  <div class="docs-heading">
+    <span>FAQ ET AIDE</span>
+    <h2>Questions fréquentes</h2>
+  </div>
+
+  <div class="docs-faq">
+    <details>
+      <summary>Pourquoi Pool Pilot ne propose aucune recommandation ?</summary>
+      <p>Vérifiez que les mesures sont disponibles, que les valeurs cibles sont renseignées et que les capteurs renvoient des valeurs numériques.</p>
+    </details>
+    <details>
+      <summary>Pourquoi la filtration automatique ne démarre-t-elle pas ?</summary>
+      <p>Contrôlez que le mode AUTO est activé, que le mode Maintenance est désactivé et que l’entité de filtration répond manuellement.</p>
+    </details>
+    <details>
+      <summary>Quelle différence entre ORP et chlore libre ?</summary>
+      <p>L’ORP mesure le potentiel d’oxydoréduction, tandis que le chlore libre représente directement une concentration en désinfectant. Pool Pilot utilise le mode sélectionné dans votre configuration.</p>
+    </details>
+    <details>
+      <summary>Faut-il activer toutes les notifications ?</summary>
+      <p>Non. Activez uniquement les catégories utiles à votre installation afin d’éviter les messages inutiles.</p>
+    </details>
+    <details>
+      <summary>Que se passe-t-il en mode Maintenance ?</summary>
+      <p>Les actions automatiques sont suspendues, mais les mesures continuent d’être enregistrées et les commandes manuelles restent disponibles.</p>
+    </details>
+    <details>
+      <summary>Une commande ne fonctionne pas depuis Pool Pilot</summary>
+      <p>Testez d’abord l’entité directement dans Home Assistant. Si elle ne répond pas, le problème vient de l’intégration ou du matériel source.</p>
+    </details>
+  </div>
+</section>
+
+<section class="docs-final-cta">
+  <div>
+    <h2>Besoin de revoir l’installation ?</h2>
+    <p>Le guide illustré reste disponible séparément.</p>
+  </div>
+  <a class="button button-light" href="{{ base_url_absolute }}/installation">Voir le guide d’installation</a>
+</section>
+{% endblock %}
