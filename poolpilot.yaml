@@ -1,1 +1,30 @@
 enabled: true
+
+roadmap:
+  enabled: true
+  owner: amery74
+  repositories:
+    - name: ha-poolpilot
+      label: Intégration
+      type: integration
+    - name: pool-pilot-dashboard
+      label: Dashboard
+      type: dashboard
+  cache_ttl: 21600
+  request_timeout: 8
+  token: ''
+  labels:
+    done:
+      - 'roadmap: disponible'
+      - 'roadmap: terminé'
+      - 'status: done'
+    progress:
+      - 'roadmap: en cours'
+      - 'status: in progress'
+    planned:
+      - 'roadmap: prévu'
+      - 'status: planned'
+    study:
+      - "roadmap: à l'étude"
+      - 'roadmap: a etudier'
+      - 'status: idea'

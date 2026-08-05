@@ -1,0 +1,246 @@
+{% extends 'partials/base.html.twig' %}
+
+{% set roadmap = poolpilot_roadmap|default({
+  ok: false,
+  groups: {done: [], progress: [], planned: [], study: [], other: []},
+  releases: [],
+  warning: 'La roadmap est en cours de synchronisation.',
+  generated_at: null
+}) %}
+
+{% macro issue_card(item) %}
+<article class="roadmap-item">
+  <div class="roadmap-item-top">
+    <span class="roadmap-repository roadmap-repository-{{ item.repository_type }}">
+      {{ item.repository_label }}
+    </span>
+    {% if item.milestone %}
+      <span class="roadmap-milestone">{{ item.milestone }}</span>
+    {% endif %}
+  </div>
+
+  <h3>
+    <a href="{{ item.url }}" target="_blank" rel="noopener">
+      {{ item.title }}
+    </a>
+  </h3>
+
+  {% if item.labels %}
+  <div class="roadmap-labels">
+    {% for label in item.labels %}
+      <span>{{ label }}</span>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  <footer>
+    <span>#{{ item.number }}</span>
+    {% if item.updated_at %}
+      <span>Mis à jour le {{ item.updated_at|date('d/m/Y') }}</span>
+    {% endif %}
+  </footer>
+</article>
+{% endmacro %}
+
+<section class="roadmap-hero">
+  <div class="roadmap-hero-inner">
+    <span class="eyebrow">ROADMAP</span>
+    <h1>Suivez l’évolution<br><span>de Pool Pilot.</span></h1>
+    <p>
+      Cette page est automatiquement synchronisée avec les issues, labels,
+      milestones et releases des dépôts GitHub Pool Pilot.
+    </p>
+    <div class="roadmap-hero-actions">
+      <a class="button button-light" href="https://github.com/amery74/ha-poolpilot/issues" target="_blank" rel="noopener">
+        Voir les issues GitHub
+      </a>
+      <a class="button button-outline" href="#roadmap-board">
+        Explorer la roadmap
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="roadmap-releases">
+  <div class="roadmap-section-heading">
+    <span>DERNIÈRES VERSIONS</span>
+    <h2>Releases publiées sur GitHub</h2>
+  </div>
+
+  {% if roadmap.releases %}
+  <div class="roadmap-release-grid">
+    {% for release in roadmap.releases %}
+    <a href="{{ release.url }}" target="_blank" rel="noopener" class="roadmap-release-card">
+      <span class="roadmap-repository roadmap-repository-{{ release.repository_type }}">
+        {{ release.repository_label }}
+      </span>
+      <strong>{{ release.name ?: release.tag }}</strong>
+      {% if release.published_at %}
+        <small>Publiée le {{ release.published_at|date('d/m/Y') }}</small>
+      {% endif %}
+    </a>
+    {% endfor %}
+  </div>
+  {% else %}
+    <p class="roadmap-empty">Aucune release GitHub n’a encore été récupérée.</p>
+  {% endif %}
+</section>
+
+{% if roadmap.warning %}
+<section class="roadmap-warning">
+  <strong>Information de synchronisation</strong>
+  <p>{{ roadmap.warning }}</p>
+</section>
+{% endif %}
+
+<section class="roadmap-board-section" id="roadmap-board">
+  <div class="roadmap-section-heading">
+    <span>PLAN DE DÉVELOPPEMENT</span>
+    <h2>Une vue issue directement de GitHub</h2>
+    <p>
+      Les cartes sont classées selon leurs labels. Une issue fermée apparaît
+      automatiquement dans la colonne Disponible.
+    </p>
+  </div>
+
+  <div class="roadmap-board">
+    <section class="roadmap-column roadmap-column-done">
+      <header>
+        <span class="roadmap-column-dot"></span>
+        <div>
+          <h2>Disponible</h2>
+          <p>Fonctions terminées ou issues fermées</p>
+        </div>
+        <strong>{{ roadmap.groups.done|length }}</strong>
+      </header>
+      <div class="roadmap-column-items">
+        {% for item in roadmap.groups.done %}
+          {{ _self.issue_card(item) }}
+        {% else %}
+          <p class="roadmap-empty">Aucune issue terminée n’est encore classée.</p>
+        {% endfor %}
+      </div>
+    </section>
+
+    <section class="roadmap-column roadmap-column-progress">
+      <header>
+        <span class="roadmap-column-dot"></span>
+        <div>
+          <h2>En développement</h2>
+          <p>Label « roadmap: en cours »</p>
+        </div>
+        <strong>{{ roadmap.groups.progress|length }}</strong>
+      </header>
+      <div class="roadmap-column-items">
+        {% for item in roadmap.groups.progress %}
+          {{ _self.issue_card(item) }}
+        {% else %}
+          <p class="roadmap-empty">Aucune fonction n’est actuellement classée en cours.</p>
+        {% endfor %}
+      </div>
+    </section>
+
+    <section class="roadmap-column roadmap-column-planned">
+      <header>
+        <span class="roadmap-column-dot"></span>
+        <div>
+          <h2>Prévu</h2>
+          <p>Label « roadmap: prévu »</p>
+        </div>
+        <strong>{{ roadmap.groups.planned|length }}</strong>
+      </header>
+      <div class="roadmap-column-items">
+        {% for item in roadmap.groups.planned %}
+          {{ _self.issue_card(item) }}
+        {% else %}
+          <p class="roadmap-empty">Aucune fonction prévue n’est encore classée.</p>
+        {% endfor %}
+      </div>
+    </section>
+
+    <section class="roadmap-column roadmap-column-study">
+      <header>
+        <span class="roadmap-column-dot"></span>
+        <div>
+          <h2>À l’étude</h2>
+          <p>Label « roadmap: à l'étude »</p>
+        </div>
+        <strong>{{ roadmap.groups.study|length }}</strong>
+      </header>
+      <div class="roadmap-column-items">
+        {% for item in roadmap.groups.study %}
+          {{ _self.issue_card(item) }}
+        {% else %}
+          <p class="roadmap-empty">Aucune idée n’est encore classée à l’étude.</p>
+        {% endfor %}
+      </div>
+    </section>
+  </div>
+
+  {% if roadmap.groups.other %}
+  <details class="roadmap-other">
+    <summary>Issues ouvertes sans label Roadmap ({{ roadmap.groups.other|length }})</summary>
+    <div class="roadmap-other-grid">
+      {% for item in roadmap.groups.other %}
+        {{ _self.issue_card(item) }}
+      {% endfor %}
+    </div>
+  </details>
+  {% endif %}
+</section>
+
+<section class="roadmap-howto">
+  <div class="roadmap-section-heading">
+    <span>GÉRER LA ROADMAP</span>
+    <h2>Une organisation simple dans GitHub</h2>
+  </div>
+
+  <div class="roadmap-howto-grid">
+    <article>
+      <code>roadmap: disponible</code>
+      <h3>Disponible</h3>
+      <p>Pour une fonction livrée. Les issues fermées sont également classées ici automatiquement.</p>
+    </article>
+    <article>
+      <code>roadmap: en cours</code>
+      <h3>En développement</h3>
+      <p>Pour les éléments actuellement en cours de réalisation.</p>
+    </article>
+    <article>
+      <code>roadmap: prévu</code>
+      <h3>Prévu</h3>
+      <p>Pour les fonctions validées mais pas encore commencées.</p>
+    </article>
+    <article>
+      <code>roadmap: à l'étude</code>
+      <h3>À l’étude</h3>
+      <p>Pour les idées qui nécessitent encore une validation ou une réflexion.</p>
+    </article>
+  </div>
+
+  <aside class="roadmap-cache-info">
+    <strong>Synchronisation et cache</strong>
+    <p>
+      Les données sont conservées localement pendant 6 heures pour préserver les
+      limites de l’API GitHub et garantir l’affichage même en cas d’indisponibilité temporaire.
+    </p>
+    {% if roadmap.generated_at %}
+      <small>
+        Dernière synchronisation connue :
+        {{ roadmap.generated_at|date('d/m/Y à H:i') }}
+        · état du cache : {{ roadmap.cache_status|default('inconnu') }}
+      </small>
+    {% endif %}
+  </aside>
+</section>
+
+<section class="roadmap-final-cta">
+  <div>
+    <h2>Une idée pour Pool Pilot ?</h2>
+    <p>Proposez une amélioration ou signalez un problème directement sur GitHub.</p>
+  </div>
+  <a class="button button-light" href="https://github.com/amery74/ha-poolpilot/issues/new" target="_blank" rel="noopener">
+    Créer une issue
+  </a>
+</section>
+{% endblock %}
