@@ -1,24 +1,65 @@
-<header class="site-header">
-  <a class="brand" href="{{ base_url_absolute ?: '/' }}" aria-label="Accueil Pool Pilot">
-    <img src="{{ url('theme://images/logo-horizontal.svg') }}" alt="Pool Pilot">
-  </a>
+<header class="site-header" data-site-header>
+  <div class="header-inner">
+    <a class="brand" href="{{ base_url_absolute ?: '/' }}" aria-label="Accueil Pool Pilot">
+      <img src="{{ url('theme://images/logo-horizontal.svg') }}" alt="Pool Pilot">
+    </a>
 
-  <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-nav">
-    Menu
-  </button>
+    <nav id="main-nav" class="main-nav" aria-label="Navigation principale">
+      <a href="#accueil" class="is-active">Accueil</a>
+      <a href="#fonctionnalites">Fonctionnalités</a>
+      <a href="#installation">Installation</a>
+      <a href="#documentation">Documentation</a>
+      <a href="#compatibilite">Compatibilité</a>
+      <a href="#roadmap">Roadmap</a>
+      <a href="#faq">FAQ</a>
+    </nav>
 
-  <nav id="main-nav" class="main-nav" aria-label="Navigation principale">
-    <a href="#accueil">Accueil</a>
-    <a href="#fonctionnalites">Fonctionnalités</a>
-    <a href="#installation">Installation</a>
-    <a href="#documentation">Documentation</a>
-    <a href="#compatibilite">Compatibilité</a>
-    <a href="#roadmap">Roadmap</a>
-    <a href="#faq">FAQ</a>
-  </nav>
+    <div class="header-actions">
+      <a
+        class="button button-secondary header-github"
+        href="https://github.com/amery74/ha-poolpilot"
+        target="_blank"
+        rel="noopener">
+        <span aria-hidden="true">◉</span>
+        GitHub
+      </a>
+      <a class="button header-install" href="#installation">
+        Installer via HACS
+      </a>
+    </div>
 
-  <div class="header-actions">
-    <a class="button button-secondary" href="https://github.com/amery74/ha-poolpilot">GitHub</a>
-    <a class="button" href="#installation">Installer via HACS</a>
+    <button
+      class="menu-toggle"
+      type="button"
+      aria-expanded="false"
+      aria-controls="mobile-menu"
+      aria-label="Ouvrir le menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+
+  <div id="mobile-menu" class="mobile-menu" hidden>
+    <nav aria-label="Navigation mobile">
+      <a href="#accueil">Accueil</a>
+      <a href="#fonctionnalites">Fonctionnalités</a>
+      <a href="#installation">Installation</a>
+      <a href="#documentation">Documentation</a>
+      <a href="#compatibilite">Compatibilité</a>
+      <a href="#roadmap">Roadmap</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+
+    <div class="mobile-menu-actions">
+      <a
+        class="button button-secondary"
+        href="https://github.com/amery74/ha-poolpilot"
+        target="_blank"
+        rel="noopener">
+        GitHub
+      </a>
+      <a class="button" href="#installation">Installer via HACS</a>
+    </div>
   </div>
 </header>
