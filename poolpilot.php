@@ -33,7 +33,32 @@ class Poolpilot extends Theme
 
     private function loadRoadmap(): array
     {
-        $config = (array) $this->config->get('roadmap', []);
+        $defaults = [
+            'enabled' => true,
+            'owner' => 'amery74',
+            'repositories' => [
+                ['name' => 'ha-poolpilot', 'label' => 'Intégration', 'type' => 'integration'],
+                ['name' => 'pool-pilot-dashboard', 'label' => 'Dashboard', 'type' => 'dashboard'],
+            ],
+            'cache_ttl' => 21600,
+            'request_timeout' => 8,
+            'token' => '',
+            'labels' => [
+                'done' => ['roadmap: disponible', 'roadmap: terminé', 'status: done'],
+                'progress' => ['roadmap: en cours', 'status: in progress'],
+                'planned' => ['roadmap: prévu', 'status: planned'],
+                'study' => ["roadmap: à l'étude", 'roadmap: a etudier', 'status: idea'],
+            ],
+        ];
+
+        $themeConfig = (array) $this->grav['config']->get('themes.poolpilot.roadmap', []);
+        $localConfig = (array) $this->config->get('roadmap', []);
+        $config = array_replace_recursive($defaults, $themeConfig, $localConfig);
+
+        if (empty($config['repositories']) || !is_array($config['repositories'])) {
+            $config['repositories'] = $defaults['repositories'];
+        }
+
         $enabled = (bool) ($config['enabled'] ?? true);
         $cacheFile = $this->grav['locator']->findResource(
             'user://data/poolpilot-roadmap-cache.json',
@@ -80,6 +105,13 @@ class Poolpilot extends Theme
         $owner = trim((string) ($config['owner'] ?? 'amery74'));
         $repositories = (array) ($config['repositories'] ?? []);
         $labelsConfig = (array) ($config['labels'] ?? []);
+
+        if ($owner === '') {
+            $owner = 'amery74';
+        }
+        if (!$repositories) {
+            throw new \RuntimeException('Aucun dépôt GitHub n’est configuré pour la roadmap.');
+        }
         $groups = [
             'done' => [],
             'progress' => [],
@@ -158,16 +190,38 @@ class Poolpilot extends Theme
                     'url' => (string) ($release['html_url'] ?? ''),
                     'published_at' => (string) ($release['published_at'] ?? ''),
                 ];
-            } catch (\Throwable $ignored) {
-                $releases[] = [
-                    'repository' => $repoName,
-                    'repository_label' => $repoLabel,
-                    'repository_type' => $repoType,
-                    'name' => 'Aucune release publiée',
-                    'tag' => '',
-                    'url' => sprintf('https://github.com/%s/%s/releases', $owner, $repoName),
-                    'published_at' => '',
-                ];
+            } catch (\Throwable $releaseException) {
+                try {
+                    $tagsUrl = sprintf(
+                        'https://api.github.com/repos/%s/%s/tags?per_page=1',
+                        rawurlencode($owner),
+                        rawurlencode($repoName)
+                    );
+                    $tags = $this->githubRequest($tagsUrl, $config);
+                    $latestTag = isset($tags[0]['name']) ? (string) $tags[0]['name'] : '';
+
+                    $releases[] = [
+                        'repository' => $repoName,
+                        'repository_label' => $repoLabel,
+                        'repository_type' => $repoType,
+                        'name' => $latestTag !== '' ? $latestTag : 'Release indisponible',
+                        'tag' => $latestTag,
+                        'url' => sprintf('https://github.com/%s/%s/releases', $owner, $repoName),
+                        'published_at' => '',
+                        'fallback' => true,
+                    ];
+                } catch (\Throwable $tagException) {
+                    $releases[] = [
+                        'repository' => $repoName,
+                        'repository_label' => $repoLabel,
+                        'repository_type' => $repoType,
+                        'name' => 'Synchronisation indisponible',
+                        'tag' => '',
+                        'url' => sprintf('https://github.com/%s/%s/releases', $owner, $repoName),
+                        'published_at' => '',
+                        'fallback' => true,
+                    ];
+                }
             }
         }
 
