@@ -15,6 +15,7 @@
   <link rel="apple-touch-icon" href="{{ url('theme://images/apple-touch-icon.png') }}">
 
   {% do assets.addCss('theme://css/site.css', 100) %}
+  {% do assets.addCss('theme://css/features.css', 90) %}
   {% do assets.addJs('theme://js/site.js', 100) %}
   {{ assets.css()|raw }}
 </head>
