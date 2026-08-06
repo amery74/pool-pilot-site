@@ -181,6 +181,8 @@ class Poolpilot extends Theme
 
             try {
                 $release = $this->githubRequest($releaseUrl, $config);
+                $releaseBody = (string) ($release['body'] ?? '');
+
                 $releases[] = [
                     'repository' => $repoName,
                     'repository_label' => $repoLabel,
@@ -189,6 +191,9 @@ class Poolpilot extends Theme
                     'tag' => (string) ($release['tag_name'] ?? ''),
                     'url' => (string) ($release['html_url'] ?? ''),
                     'published_at' => (string) ($release['published_at'] ?? ''),
+                    'body' => $releaseBody,
+                    'body_excerpt' => $this->releaseExcerpt($releaseBody),
+                    'fallback' => false,
                 ];
             } catch (\Throwable $releaseException) {
                 try {
@@ -208,6 +213,8 @@ class Poolpilot extends Theme
                         'tag' => $latestTag,
                         'url' => sprintf('https://github.com/%s/%s/releases', $owner, $repoName),
                         'published_at' => '',
+                        'body' => '',
+                        'body_excerpt' => '',
                         'fallback' => true,
                     ];
                 } catch (\Throwable $tagException) {
@@ -219,6 +226,8 @@ class Poolpilot extends Theme
                         'tag' => '',
                         'url' => sprintf('https://github.com/%s/%s/releases', $owner, $repoName),
                         'published_at' => '',
+                        'body' => '',
+                        'body_excerpt' => '',
                         'fallback' => true,
                     ];
                 }
@@ -242,6 +251,44 @@ class Poolpilot extends Theme
             'warning' => null,
             'error_detail' => null,
         ];
+    }
+
+    private function releaseExcerpt(string $body, int $limit = 700): string
+    {
+        $text = trim($body);
+        if ($text === '') {
+            return '';
+        }
+
+        // Keep release notes readable without injecting raw GitHub HTML into the page.
+        $text = preg_replace('/```.*?```/s', ' ', $text) ?? $text;
+        $text = preg_replace('/`([^`]+)`/', '$1', $text) ?? $text;
+        $text = preg_replace('/!\[[^\]]*\]\([^)]+\)/', ' ', $text) ?? $text;
+        $text = preg_replace('/\[([^\]]+)\]\([^)]+\)/', '$1', $text) ?? $text;
+        $text = preg_replace('/^\s{0,3}#{1,6}\s*/m', '', $text) ?? $text;
+        $text = preg_replace('/^\s*[-*+]\s+/m', '• ', $text) ?? $text;
+        $text = preg_replace('/^\s*\d+\.\s+/m', '• ', $text) ?? $text;
+        $text = preg_replace('/[*_~>]+/', '', $text) ?? $text;
+        $text = preg_replace("/\r\n?/", "\n", $text) ?? $text;
+        $text = preg_replace("/\n{3,}/", "\n\n", $text) ?? $text;
+        $text = trim($text);
+
+        if (mb_strlen($text) <= $limit) {
+            return $text;
+        }
+
+        $excerpt = mb_substr($text, 0, $limit);
+        $lastBreak = max(
+            (int) mb_strrpos($excerpt, "\n"),
+            (int) mb_strrpos($excerpt, '. '),
+            (int) mb_strrpos($excerpt, ' ')
+        );
+
+        if ($lastBreak > (int) ($limit * 0.65)) {
+            $excerpt = mb_substr($excerpt, 0, $lastBreak);
+        }
+
+        return rtrim($excerpt, " \t\n\r\0\x0B.,;:") . '…';
     }
 
     private function resolveGroup(string $state, array $labels, array $labelsConfig): string

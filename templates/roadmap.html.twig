@@ -72,15 +72,36 @@
   {% if roadmap.releases %}
   <div class="roadmap-release-grid">
     {% for release in roadmap.releases %}
-    <a href="{{ release.url }}" target="_blank" rel="noopener" class="roadmap-release-card">
-      <span class="roadmap-repository roadmap-repository-{{ release.repository_type }}">
-        {{ release.repository_label }}
-      </span>
-      <strong>{{ release.name ?: release.tag }}</strong>
-      {% if release.published_at %}
-        <small>Publiée le {{ release.published_at|date('d/m/Y') }}</small>
+    <article class="roadmap-release-card{% if release.fallback %} roadmap-release-card-fallback{% endif %}">
+      <div class="roadmap-release-header">
+        <span class="roadmap-repository roadmap-repository-{{ release.repository_type }}">
+          {{ release.repository_label }}
+        </span>
+        {% if release.published_at %}
+          <small>Publiée le {{ release.published_at|date('d/m/Y') }}</small>
+        {% endif %}
+      </div>
+
+      <h3>{{ release.name ?: release.tag }}</h3>
+
+      {% if release.body_excerpt %}
+        <div class="roadmap-release-notes">
+          {{ release.body_excerpt|e|nl2br }}
+        </div>
+      {% elseif release.fallback %}
+        <p class="roadmap-release-empty">
+          Les notes de version n’ont pas pu être récupérées. Le dernier tag connu est affiché.
+        </p>
+      {% else %}
+        <p class="roadmap-release-empty">
+          Cette release ne contient pas encore de notes de version.
+        </p>
       {% endif %}
-    </a>
+
+      <a href="{{ release.url }}" target="_blank" rel="noopener" class="roadmap-release-link">
+        Voir la release complète sur GitHub
+      </a>
+    </article>
     {% endfor %}
   </div>
   {% else %}
