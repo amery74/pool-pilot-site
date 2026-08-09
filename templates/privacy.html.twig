@@ -1,0 +1,42 @@
+{% extends 'partials/base.html.twig' %}
+
+{% block content %}
+<article class="standard-page legal-page privacy-page">
+  <h1>{{ page.title|default('Confidentialité & cookies') }}</h1>
+  <div class="legal-intro">
+    {% if page.content|trim %}
+      {{ page.content|raw }}
+    {% else %}
+      <p>Pool Pilot limite au maximum la collecte de données lors de la consultation de <strong>pool-pilot.app</strong>.</p>
+
+      <h2>Cookies et mesure d’audience</h2>
+      <p>Le site public <strong>n’utilise pas de cookies publicitaires ni de traceurs de profilage</strong>.</p>
+      <p>Une mesure d’audience est réalisée avec <strong>Umami</strong>, une solution open source auto-hébergée par Pool Pilot. Le script de mesure est servi depuis <code>analytics.pool-pilot.app</code> et ne dépose pas de cookie dans le navigateur. Il est utilisé uniquement pour obtenir des statistiques de fréquentation du site, par exemple les pages consultées, les sources de trafic, le type de navigateur ou d’appareil et des données de session anonymisées.</p>
+      <p>Les données de mesure d’audience sont hébergées sur l’infrastructure de Pool Pilot et ne sont pas utilisées à des fins publicitaires, revendues ou croisées avec des données provenant d’autres sites. Les fonctions <strong>Replays</strong> et <strong>Heatmaps</strong> d’Umami ne sont pas activées.</p>
+      <p>Le site ne présente donc pas de bandeau « Accepter / Refuser » pour cette mesure d’audience sans cookie. Si des contenus tiers, cookies ou autres traceurs soumis au consentement sont ajoutés ultérieurement, cette page et le mécanisme de consentement seront adaptés avant leur activation.</p>
+      <p>Des mécanismes techniques strictement nécessaires au fonctionnement, à la sécurité ou à l’administration du site peuvent toutefois être utilisés par la plateforme d’hébergement. Ils ne sont pas employés à des fins publicitaires ou de suivi inter-sites.</p>
+
+      <h2>Données collectées lors de la navigation</h2>
+      <p>Pool Pilot ne met actuellement en œuvre aucun formulaire de création de compte, espace utilisateur ou profilage des visiteurs sur le site public.</p>
+      <p>Comme pour tout service web, des données techniques peuvent être enregistrées temporairement dans les journaux du serveur afin d’assurer le fonctionnement et la sécurité du service, par exemple l’adresse IP, la date et l’heure d’une requête, la ressource demandée ou des informations techniques sur la requête.</p>
+      <p>Ces informations ne sont pas utilisées pour établir un profil publicitaire des visiteurs.</p>
+
+      <h2>Contact par e-mail</h2>
+      <p>Lorsque vous écrivez à <a href="mailto:contact@pool-pilot.app">contact@pool-pilot.app</a>, les informations que vous transmettez volontairement sont utilisées uniquement pour traiter votre demande et assurer le suivi de l’échange.</p>
+      <p>La messagerie du domaine est fournie par <strong>OVHcloud</strong>. Les messages sont conservés pendant la durée nécessaire au traitement et au suivi de la demande, sauf nécessité légale ou technique imposant une conservation plus longue.</p>
+
+      <h2>Services et liens tiers</h2>
+      <p>Le site propose notamment des liens vers GitHub et peut renvoyer vers la documentation Home Assistant ou HACS. Lorsque vous ouvrez un service externe, la politique de confidentialité et les éventuels cookies de ce service s’appliquent indépendamment de Pool Pilot.</p>
+
+      <h2>Vos droits</h2>
+      <p>Pour toute question concernant vos données ou pour exercer un droit applicable (accès, rectification, effacement, opposition ou limitation), vous pouvez écrire à <a href="mailto:contact@pool-pilot.app">contact@pool-pilot.app</a>.</p>
+      <p>Vous pouvez également saisir la <strong>CNIL</strong> si vous estimez, après nous avoir contactés, que vos droits ne sont pas respectés.</p>
+
+      <h2>Évolution de cette politique</h2>
+      <p>Cette politique pourra évoluer si de nouvelles fonctions sont ajoutées au site, notamment un formulaire, un outil de statistiques ou un service tiers. La date de mise à jour figurera sur cette page.</p>
+
+      <p><em>Dernière mise à jour : 9 août 2026.</em></p>
+    {% endif %}
+  </div>
+</article>
+{% endblock %}

@@ -2,7 +2,43 @@
 
 {% block content %}
 <article class="standard-page legal-page">
-  <h1>{{ page.title }}</h1>
-  <div class="legal-intro">{{ page.content|raw }}</div>
+  <h1>{{ page.title|default('Mentions légales') }}</h1>
+  <div class="legal-intro">
+    {% if page.content|trim %}
+      {{ page.content|raw }}
+    {% else %}
+      <p>Informations relatives à l’édition, à l’hébergement et à l’utilisation du site <strong>pool-pilot.app</strong>.</p>
+
+      <h2>Éditeur du site</h2>
+      <p><strong>Pool Pilot</strong> est un projet open source consacré au pilotage de piscine dans Home Assistant.</p>
+      <ul>
+        <li>Site : <strong>pool-pilot.app</strong></li>
+        <li>Contact : <a href="mailto:contact@pool-pilot.app">contact@pool-pilot.app</a></li>
+        <li>Dépôt principal : <a href="https://github.com/amery74/ha-poolpilot" target="_blank" rel="noopener">GitHub – Pool Pilot</a></li>
+      </ul>
+      <p>Le site est édité à titre non professionnel par l’auteur du projet Pool Pilot. Le responsable de la publication est l’éditeur du site.</p>
+
+      <h2>Hébergement</h2>
+      <p>Le site est <strong>auto-hébergé sur une infrastructure privée située en France</strong> et administrée par l’éditeur du projet.</p>
+      <p>Pour toute demande concernant le site ou son hébergement : <a href="mailto:contact@pool-pilot.app">contact@pool-pilot.app</a>.</p>
+
+      <h2>Propriété intellectuelle</h2>
+      <p>Sauf mention contraire, les contenus propres au site Pool Pilot (textes, éléments graphiques, captures et identité visuelle) sont protégés par les règles applicables à la propriété intellectuelle.</p>
+      <p>Le code source de Pool Pilot est distribué selon les conditions de la <strong>licence MIT</strong> indiquée dans les dépôts GitHub correspondants. Les marques, noms, logos et produits tiers cités sur le site restent la propriété de leurs titulaires respectifs.</p>
+
+      <h2>Responsabilité</h2>
+      <p>Les informations publiées sur le site sont fournies à titre informatif et peuvent évoluer avec le projet. Malgré le soin apporté à leur mise à jour, aucune garantie n’est donnée quant à leur exhaustivité ou à l’absence d’erreur.</p>
+      <p>Pool Pilot est un projet indépendant. Il n’est ni affilié, ni approuvé, ni maintenu par Home Assistant ou Nabu Casa.</p>
+      <p>L’utilisateur reste responsable de la configuration de ses équipements et de l’utilisation des automatismes appliqués à sa piscine.</p>
+
+      <h2>Liens externes</h2>
+      <p>Le site peut contenir des liens vers des services ou sites tiers, notamment GitHub et Home Assistant. L’éditeur n’exerce aucun contrôle sur le contenu ou la disponibilité de ces services externes.</p>
+
+      <h2>Données personnelles et cookies</h2>
+      <p>Les informations relatives aux données personnelles et aux cookies sont détaillées dans la page <a href="{{ base_url_absolute }}/confidentialite">Confidentialité &amp; cookies</a>.</p>
+
+      <p><em>Dernière mise à jour : 9 août 2026.</em></p>
+    {% endif %}
+  </div>
 </article>
 {% endblock %}

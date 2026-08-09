@@ -1,6 +1,6 @@
 ---
 title: Confidentialité & cookies
-template: legal
+template: privacy
 slug: confidentialite
 visible: false
 metadata:
