@@ -28,3 +28,21 @@ git pull
 cd /opt/grav
 php bin/grav clear-cache
 ```
+
+
+## v0.4.3 — Statistiques Umami
+
+- Ajout du script de mesure d’audience Umami sur toutes les pages du site.
+- Endpoint public utilisé : `https://analytics.pool-pilot.app/script.js`.
+- Website ID : `7c61b0c7-a165-4f87-a93b-5cc2996a461d`.
+- Mise à jour de la page Confidentialité pour documenter la mesure d’audience auto-hébergée et sans cookie.
+- Replays et Heatmaps restent désactivés.
+
+## v0.4.2 — Mentions légales et confidentialité
+
+- Ajout des pages `/mentions-legales` et `/confidentialite`.
+- Ajout des liens légaux et de `contact@pool-pilot.app` dans le footer.
+- Correction des liens Accueil, FAQ et Documentation afin qu'ils fonctionnent depuis toutes les pages.
+- Aucun bandeau de consentement n'est affiché tant qu'aucun traceur soumis au consentement n'est intégré au site.
+
+> Note conformité : la page de mentions légales décrit actuellement le site comme un projet open source édité à titre non professionnel et auto-hébergé. L'éditeur doit vérifier que les informations d'identification affichées correspondent à sa situation juridique avant mise en production.
