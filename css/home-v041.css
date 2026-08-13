@@ -268,3 +268,32 @@
     height:285px;
   }
 }
+
+/* v0.4.2 — affichage complet des captures Dashboard sur ordinateur
+   Les captures sont verticales : ne pas les agrandir avec cover dans les cadres larges. */
+@media (min-width:1051px){
+  .home-large-shot a{
+    height:600px;
+    display:flex;
+    align-items:flex-start;
+    justify-content:center;
+    background:#f4f8fc;
+  }
+  .home-large-shot img{
+    width:100%;
+    height:100%;
+    object-fit:contain;
+    object-position:top center;
+  }
+
+  .home-device.desktop{
+    background:#091f39;
+  }
+  .home-device.desktop img{
+    width:100%;
+    height:500px;
+    object-fit:contain;
+    object-position:top center;
+    background:#f4f8fc;
+  }
+}
