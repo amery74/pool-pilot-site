@@ -1,120 +1,33 @@
 {% extends 'partials/base.html.twig' %}
 
 {% block content %}
-<section class="demo-page" data-poolpilot-demo>
+<section class="demo-page" data-poolpilot-official-demo>
   <header class="demo-intro">
     <span class="section-label">DÉMO INTERACTIVE</span>
-    <h1>Essayez Pool Pilot comme dans Home Assistant</h1>
-    <p>Cette version light reprend l’apparence de la carte officielle Pool Pilot avec des données simulées. Aucun équipement réel n’est commandé.</p>
-    <div class="demo-notice">🧪 Démonstration locale — aucune piscine réelle n’est pilotée.</div>
+    <h1>Essayez la vraie carte Pool Pilot</h1>
+    <p>Cette démonstration charge directement le composant officiel Pool Pilot Dashboard et lui fournit une fausse instance Home Assistant locale.</p>
+    <div class="demo-notice">🧪 Démonstration — aucune piscine réelle n’est pilotée.</div>
   </header>
 
   <div class="demo-layout">
     <aside class="demo-scenarios" aria-label="Scénarios de démonstration">
       <h2>Scénarios</h2>
-      <p>Changez l’état du bassin pour voir les valeurs, alertes et recommandations évoluer.</p>
+      <p>Les valeurs injectées dans la carte sont simulées. Le rendu et les interactions proviennent de la carte officielle.</p>
       <button class="demo-scenario is-active" type="button" data-demo-scenario="balanced">✅ Piscine équilibrée</button>
-      <button class="demo-scenario" type="button" data-demo-scenario="high-ph">⚠️ pH trop élevé</button>
-      <button class="demo-scenario" type="button" data-demo-scenario="low-orp">🧪 Désinfection insuffisante</button>
+      <button class="demo-scenario" type="button" data-demo-scenario="highph">⚠️ pH trop élevé</button>
+      <button class="demo-scenario" type="button" data-demo-scenario="loworp">🧪 Désinfection insuffisante</button>
       <button class="demo-reset" type="button" data-demo-reset>Réinitialiser la démo</button>
+      <div class="demo-source-note"><strong>Carte officielle</strong><span>pool-pilot-dashboard</span></div>
     </aside>
 
-    <div class="demo-card" data-demo-card>
-      <div class="pp-demo-title">Piscine</div>
-
-      <div class="demo-tabs" role="tablist" aria-label="Mode de la carte">
-        <button class="is-active" type="button" data-demo-tab="analysis"><span>♧</span> Analyse</button>
-        <button type="button" data-demo-tab="control"><span>◉</span> Contrôle</button>
+    <div class="demo-ha-shell">
+      <div class="demo-ha-topbar">
+        <span></span><span></span><span></span>
+        <strong>Home Assistant · Piscine</strong>
+        <em>Démo</em>
       </div>
-
-      <section class="demo-panel is-active" data-demo-panel="analysis">
-        <div class="demo-weather">
-          <div class="demo-air"><span>air</span><strong data-demo-air>31,8 °C</strong></div>
-          <div class="demo-weather-side">
-            <span class="demo-weather-icons">☀︎ · ☼</span>
-            <span class="demo-uv">UV <b data-demo-uv>7</b></span>
-            <span class="demo-weather-dots">● ●</span>
-          </div>
-        </div>
-
-        <div class="demo-equipment-row">
-          <button class="demo-equipment is-on" type="button" data-demo-toggle="filter">
-            <span class="demo-equipment-icon">♨</span><span class="demo-equipment-name">Pompe à filtration</span><b data-demo-state="filter">ON</b>
-          </button>
-          <button class="demo-equipment is-on" type="button" data-demo-toggle="heat">
-            <span class="demo-equipment-icon">▣</span><span class="demo-equipment-name">Pompe à chaleur</span><b data-demo-state="heat">ON</b>
-          </button>
-          <button class="demo-equipment" type="button" data-demo-toggle="light">
-            <span class="demo-equipment-icon">≋</span><span class="demo-equipment-name">Nage contre-courant</span><b data-demo-state="light">OFF</b>
-          </button>
-        </div>
-
-        <div class="demo-water">
-          <div class="demo-wave" aria-hidden="true"></div>
-          <div class="demo-last-measure">
-            <span class="demo-signal">⌁</span>
-            <div><small>Dernière mesure de l’eau</small><strong data-demo-time>maintenant</strong></div>
-            <button type="button" title="Simuler une nouvelle mesure" data-demo-measure>◴</button>
-          </div>
-
-          <div class="demo-temperature"><span>eau</span><strong data-demo-water>26,4 °C</strong></div>
-
-          <div class="demo-gauges">
-            <div class="demo-gauge">
-              <div class="demo-gauge-ring"><i></i><strong data-demo-ph>7,20</strong></div>
-              <span>pH</span><small data-demo-ph-state>Bon</small>
-            </div>
-            <div class="demo-gauge">
-              <div class="demo-gauge-ring"><i></i><strong data-demo-orp>690</strong><em>mV</em></div>
-              <span>RedOx / ORP</span><small data-demo-orp-state>Bon</small>
-            </div>
-          </div>
-        </div>
-
-        <div class="demo-alert is-ok" data-demo-alert>
-          <strong data-demo-alert-title>✅ Eau équilibrée</strong>
-          <p data-demo-alert-text>Aucune correction immédiate n’est nécessaire.</p>
-        </div>
-      </section>
-
-      <section class="demo-panel" data-demo-panel="control">
-        <div class="demo-control-head">Contrôle des équipements</div>
-        <div class="demo-control-grid">
-          <article>
-            <div><span>Filtration</span><strong data-demo-filter-label>En cours</strong></div>
-            <button type="button" data-demo-toggle="filter">Marche / Arrêt</button>
-          </article>
-          <article>
-            <div><span>Mode automatique</span><strong data-demo-auto-label>Activé</strong></div>
-            <button class="is-active" type="button" data-demo-toggle="auto">AUTO</button>
-          </article>
-          <article>
-            <div><span>Électrolyseur</span><strong data-demo-production>65 %</strong></div>
-            <input type="range" min="0" max="100" value="65" step="5" data-demo-production-range aria-label="Production électrolyseur">
-          </article>
-          <article>
-            <div><span>Boost</span><strong data-demo-boost-label>Inactif</strong></div>
-            <button type="button" data-demo-boost>Activer Boost</button>
-          </article>
-        </div>
-        <button class="demo-expert-button" type="button" data-demo-expert>⚙️ Ouvrir le mode Expert</button>
-      </section>
-
-      <nav class="demo-bottom-nav" aria-label="Navigation de démonstration">
-        <button type="button" data-demo-tab="analysis"><span>≋</span><small>Menu</small></button>
-        <button class="demo-bottom-main" type="button" data-demo-expert><span>♨</span></button>
-        <button type="button" data-demo-tab="control"><span>▽</span><small>Pool House</small></button>
-      </nav>
-
-      <div class="demo-expert" data-demo-expert-panel hidden>
-        <div class="demo-expert-head"><strong>Mode Expert</strong><button type="button" data-demo-expert-close>×</button></div>
-        <dl>
-          <div><dt>Filtration auto</dt><dd data-demo-expert-filter>En cours</dd></div>
-          <div><dt>Cycle du jour</dt><dd>8,4 h / 13,2 h</dd></div>
-          <div><dt>Planification</dt><dd>07:30 → 20:42</dd></div>
-          <div><dt>Température eau</dt><dd data-demo-expert-water>26,4 °C</dd></div>
-          <div><dt>Production électrolyseur</dt><dd data-demo-expert-production>65 %</dd></div>
-        </dl>
+      <div class="demo-official-host" data-official-card-host>
+        <div class="demo-loader"><span></span><strong>Chargement de Pool Pilot Dashboard…</strong></div>
       </div>
     </div>
   </div>
@@ -122,8 +35,8 @@
   <section class="demo-explain">
     <div>
       <span class="section-label">VERSION LIGHT</span>
-      <h2>Le design officiel, avec une piscine simulée</h2>
-      <p>Cette démo reprend volontairement les codes visuels de Pool Pilot Dashboard. Les interactions sont simulées localement pour découvrir l’interface sans installer Home Assistant.</p>
+      <h2>Le même composant que dans Home Assistant</h2>
+      <p>La page n’imite plus le design de Pool Pilot Dashboard : elle exécute directement la carte officielle. Seules les entités Home Assistant sont remplacées par des données de démonstration.</p>
     </div>
     <a class="button" href="{{ base_url_absolute }}/installation">Installer Pool Pilot via HACS</a>
   </section>
