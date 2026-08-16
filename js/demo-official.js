@@ -38,9 +38,21 @@
   };
 
   const scenarios = {
-    balanced: { air: 32.0, water: 26.4, ph: 7.19, orp: 626, uv: 8, alert: '', chemistry: 'good', bathing: 'good' },
-    highph:   { air: 32.5, water: 27.0, ph: 7.82, orp: 610, uv: 8, alert: 'pH trop élevé', chemistry: 'warning', bathing: 'warning' },
-    loworp:   { air: 31.6, water: 26.8, ph: 7.23, orp: 540, uv: 7, alert: 'Désinfection insuffisante', chemistry: 'warning', bathing: 'warning' },
+    balanced: {
+      air: 32.0, water: 26.4, ph: 7.19, orp: 690, uv: 8,
+      alert: 'none', chemistry: 'good', bathing: 'good',
+      actions: 'Aucune action recommandée',
+    },
+    highph: {
+      air: 32.5, water: 27.0, ph: 7.82, orp: 690, uv: 8,
+      alert: 'Alerte : pH trop haut', chemistry: 'warning', bathing: 'warning',
+      actions: 'Corriger le pH trop haut : ajouter du pH- selon le dosage recommandé par Pool Pilot.',
+    },
+    loworp: {
+      air: 31.6, water: 26.8, ph: 7.23, orp: 540, uv: 7,
+      alert: 'Alerte : RedOx / ORP trop bas', chemistry: 'warning', bathing: 'warning',
+      actions: 'Corriger le RedOx / ORP trop bas : réaliser le traitement chloré recommandé par Pool Pilot.',
+    },
   };
 
   const entity = (id, value, attrs={}) => ({ entity_id:id, state:String(value), attributes:attrs, last_changed:new Date().toISOString(), last_updated:new Date().toISOString() });
@@ -58,7 +70,8 @@
       'sensor.demo_last_measure': entity('sensor.demo_last_measure', local, {updated_at_local:local}),
       'sensor.demo_chemistry': entity('sensor.demo_chemistry', s.chemistry),
       'sensor.demo_bathing': entity('sensor.demo_bathing', s.bathing),
-      'sensor.demo_alert': entity('sensor.demo_alert', s.alert || 'none'),
+      'sensor.demo_alert': entity('sensor.demo_alert', s.alert),
+      'sensor.demo_actions': entity('sensor.demo_actions', s.actions, {pool_type:'chlorine'}),
       'sensor.demo_filtration_duration': entity('sensor.demo_filtration_duration', '13.2', {unit_of_measurement:'h'}),
       'sensor.demo_smart_filtration': entity('sensor.demo_smart_filtration', state.pump ? 'running' : 'waiting'),
       'sensor.demo_electrolyzer_output': entity('sensor.demo_electrolyzer_output', state.production, {unit_of_measurement:'%'}),
@@ -124,6 +137,8 @@
     chemistry_state_entity: 'sensor.demo_chemistry',
     bathing_state_entity: 'sensor.demo_bathing',
     alert_entity: 'sensor.demo_alert',
+    actions_entity: 'sensor.demo_actions',
+    action_summary_entity: 'sensor.demo_actions',
     pump_entity: 'switch.demo_pump',
     heatpump_entity: 'climate.demo_heatpump',
     heatpump_temp_entity: 'sensor.demo_water',
@@ -139,17 +154,25 @@
     card.hass = hass;
   }
 
+  function clearDemoSuppression() {
+    localStorage.removeItem('pool-pilot-dashboard:Piscine:snooze');
+    localStorage.removeItem('pool-pilot-dashboard:Piscine:done');
+  }
+
   function setScenario(name) {
+    clearDemoSuppression();
     state.scenario = name;
     hass.states = buildStates();
     root.querySelectorAll('[data-demo-scenario]').forEach(btn => btn.classList.toggle('is-active', btn.dataset.demoScenario === name));
-    updateCard();
+    if (card) {
+      card._panel = null;
+      card.hass = hass;
+    }
   }
 
   root.querySelectorAll('[data-demo-scenario]').forEach(btn => btn.addEventListener('click', () => setScenario(btn.dataset.demoScenario)));
   root.querySelector('[data-demo-reset]')?.addEventListener('click', () => {
     Object.assign(state, {scenario:'balanced', pump:true, heatpump:true, counter:false, electrolyzer:true, production:65, measure:new Date()});
-    hass.states = buildStates();
     setScenario('balanced');
   });
 
@@ -171,6 +194,7 @@
     card.style.display = 'block';
     card.style.width = '100%';
     card.setConfig(config);
+    clearDemoSuppression();
     card.hass = hass;
     host.replaceChildren(card);
     root.classList.add('is-ready');
