@@ -4,7 +4,14 @@
 
   const CARD_URL = 'https://cdn.jsdelivr.net/gh/amery74/pool-pilot-dashboard@9dc98b5c2f23059c2a04c34b6904cf5ea173e404/pool-pilot-dashboard-card.js';
 
-  class DemoHaCard extends HTMLElement {}
+  class DemoHaCard extends HTMLElement {
+    connectedCallback() {
+      this.style.display = 'block';
+      this.style.width = '100%';
+      this.style.boxSizing = 'border-box';
+      this.style.position = 'relative';
+    }
+  }
   if (!customElements.get('ha-card')) customElements.define('ha-card', DemoHaCard);
 
   class DemoHaIcon extends HTMLElement {
@@ -161,6 +168,8 @@
     await customElements.whenDefined('pool-pilot-dashboard');
     const host = root.querySelector('[data-official-card-host]');
     card = document.createElement('pool-pilot-dashboard');
+    card.style.display = 'block';
+    card.style.width = '100%';
     card.setConfig(config);
     card.hass = hass;
     host.replaceChildren(card);
