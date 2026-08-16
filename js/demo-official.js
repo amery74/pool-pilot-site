@@ -3,6 +3,24 @@
   if (!root) return;
 
   const CARD_URL = 'https://cdn.jsdelivr.net/gh/amery74/pool-pilot-dashboard@9dc98b5c2f23059c2a04c34b6904cf5ea173e404/pool-pilot-dashboard-card.js';
+  const POOL_VOLUME_M3 = 27;
+  const TARGET_PH = 7.4;
+  const PH_MINUS = { name: 'pH- granulés', referenceVolume: 10, dose: 100, phDelta: 0.1, unit: 'g' };
+  const CHLORINE_SHOCK = { name: 'Chlore choc granulés', referenceVolume: 10, shockDose: 150, unit: 'g' };
+
+  const fmtDose = (grams) => grams >= 1000
+    ? `${(grams / 1000).toLocaleString('fr-FR', { maximumFractionDigits: 2 })} kg`
+    : `${Math.round(grams)} g`;
+
+  function phMinusDose(ph) {
+    const delta = Math.max(0, Number(ph) - TARGET_PH);
+    if (!delta) return 0;
+    return PH_MINUS.dose * (POOL_VOLUME_M3 / PH_MINUS.referenceVolume) * (delta / PH_MINUS.phDelta);
+  }
+
+  function chlorineShockDose() {
+    return CHLORINE_SHOCK.shockDose * (POOL_VOLUME_M3 / CHLORINE_SHOCK.referenceVolume);
+  }
 
   class DemoHaCard extends HTMLElement {
     connectedCallback() {
@@ -37,6 +55,10 @@
     measure: new Date(),
   };
 
+  const highPhValue = 7.82;
+  const highPhDose = phMinusDose(highPhValue);
+  const shockDose = chlorineShockDose();
+
   const scenarios = {
     balanced: {
       air: 32.0, water: 26.4, ph: 7.19, orp: 690, uv: 8,
@@ -44,37 +66,54 @@
       actions: 'Aucune action recommandée',
       alertStatus: 'ok',
       primaryAlert: null,
+      recommendations: [],
     },
     highph: {
-      air: 32.5, water: 27.0, ph: 7.82, orp: 690, uv: 8,
+      air: 32.5, water: 27.0, ph: highPhValue, orp: 690, uv: 8,
       alert: 'Alerte : pH trop haut', chemistry: 'warning', bathing: 'warning',
-      actions: 'Corriger le pH trop haut : ajouter du pH- selon le dosage recommandé par Pool Pilot.',
+      actions: `Ajouter ${fmtDose(highPhDose)} de ${PH_MINUS.name} pour ramener progressivement le pH vers ${TARGET_PH.toLocaleString('fr-FR')}.`,
       alertStatus: 'alerte',
+      recommendations: [{
+        product_id: 'demo-ph-minus',
+        product_name: PH_MINUS.name,
+        quantity: Math.round(highPhDose),
+        unit: 'g',
+        reason: `pH mesuré à ${highPhValue.toLocaleString('fr-FR')} pour une cible de ${TARGET_PH.toLocaleString('fr-FR')}.`,
+        aftercare: 'Laissez la filtration fonctionner puis contrôlez de nouveau le pH avant toute dose supplémentaire.',
+      }],
       primaryAlert: {
         id: 'ph_high',
         title: 'pH trop élevé',
         icon: 'mdi:flask-outline',
-        message: 'Le pH est supérieur à la plage recommandée. Une correction est conseillée.',
+        message: `Pool Pilot a calculé la correction à partir du produit ${PH_MINUS.name} enregistré dans le Pool House.`,
         steps: [
-          'Ajoutez progressivement du pH- selon le dosage indiqué sur votre produit et le volume de votre bassin.',
-          'Laissez la filtration fonctionner afin de bien répartir le correcteur dans l’eau.',
-          'Attendez la diffusion du produit puis effectuez une nouvelle mesure avant d’ajouter une dose supplémentaire.',
+          `Ajoutez environ ${fmtDose(highPhDose)} de ${PH_MINUS.name} pour un bassin de ${POOL_VOLUME_M3} m³.`,
+          'Répartissez le produit conformément à son mode d’utilisation et laissez la filtration fonctionner.',
+          `Attendez la diffusion du produit puis effectuez une nouvelle mesure. Ne rajoutez pas de produit avant d’avoir contrôlé le pH.`,
         ],
       },
     },
     loworp: {
       air: 31.6, water: 26.8, ph: 7.23, orp: 540, uv: 7,
       alert: 'Alerte : RedOx / ORP trop bas', chemistry: 'warning', bathing: 'warning',
-      actions: 'Corriger le RedOx / ORP trop bas : réaliser le traitement chloré recommandé par Pool Pilot.',
+      actions: `Ajouter ${fmtDose(shockDose)} de ${CHLORINE_SHOCK.name} pour renforcer la désinfection.`,
       alertStatus: 'alerte',
+      recommendations: [{
+        product_id: 'demo-chlorine-shock',
+        product_name: CHLORINE_SHOCK.name,
+        quantity: Math.round(shockDose),
+        unit: 'g',
+        reason: 'Le RedOx / ORP est trop bas et nécessite un renforcement de la désinfection.',
+        aftercare: 'Maintenez la filtration pendant le traitement et contrôlez de nouveau le RedOx avant la baignade.',
+      }],
       primaryAlert: {
         id: 'orp_low',
         title: 'Désinfection insuffisante',
         icon: 'mdi:flask-plus-outline',
-        message: 'Le potentiel RedOx est trop bas : le niveau de désinfection doit être corrigé.',
+        message: `Pool Pilot utilise le ${CHLORINE_SHOCK.name} enregistré dans le Pool House pour proposer une correction.`,
         steps: [
           'Vérifiez d’abord que le pH reste dans la plage recommandée afin de garantir une désinfection efficace.',
-          'Effectuez le traitement chloré adapté à votre bassin ou augmentez temporairement la production de votre système de désinfection.',
+          `Ajoutez environ ${fmtDose(shockDose)} de ${CHLORINE_SHOCK.name} pour un bassin de ${POOL_VOLUME_M3} m³.`,
           'Laissez la filtration fonctionner pendant le traitement puis contrôlez à nouveau le RedOx avant la baignade.',
         ],
       },
@@ -87,7 +126,17 @@
     const s = scenarios[state.scenario];
     const d = state.measure;
     const local = d.toLocaleString('fr-FR', {day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit'}).replace(',', '');
-    const alertAttrs = s.primaryAlert ? { primary_alert:s.primaryAlert, pool_type:'chlorine' } : { pool_type:'chlorine' };
+    const alertAttrs = {
+      pool_type: 'chlorine',
+      pool_volume_m3: POOL_VOLUME_M3,
+      recommendations: s.recommendations || [],
+      ...(s.primaryAlert ? { primary_alert:s.primaryAlert } : {}),
+    };
+    const actionAttrs = {
+      pool_type: 'chlorine',
+      pool_volume_m3: POOL_VOLUME_M3,
+      recommendations: s.recommendations || [],
+    };
     return {
       'sensor.demo_water': entity('sensor.demo_water', s.water, {unit_of_measurement:'°C'}),
       'sensor.demo_air': entity('sensor.demo_air', s.air, {unit_of_measurement:'°C'}),
@@ -99,7 +148,7 @@
       'sensor.demo_bathing': entity('sensor.demo_bathing', s.bathing),
       'sensor.demo_alert': entity('sensor.demo_alert', s.alert),
       'sensor.demo_alert_status': entity('sensor.demo_alert_status', s.alertStatus, alertAttrs),
-      'sensor.demo_actions': entity('sensor.demo_actions', s.actions, {pool_type:'chlorine'}),
+      'sensor.demo_actions': entity('sensor.demo_actions', s.actions, actionAttrs),
       'sensor.demo_filtration_duration': entity('sensor.demo_filtration_duration', '13.2', {unit_of_measurement:'h'}),
       'sensor.demo_smart_filtration': entity('sensor.demo_smart_filtration', state.pump ? 'running' : 'waiting'),
       'sensor.demo_electrolyzer_output': entity('sensor.demo_electrolyzer_output', state.production, {unit_of_measurement:'%'}),
