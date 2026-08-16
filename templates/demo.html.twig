@@ -4,15 +4,15 @@
 <section class="demo-page" data-poolpilot-demo>
   <header class="demo-intro">
     <span class="section-label">DÉMO INTERACTIVE</span>
-    <h1>Essayez Pool Pilot sans installation</h1>
-    <p>Cette version de démonstration utilise uniquement des données simulées dans votre navigateur. Aucun équipement réel n’est commandé.</p>
-    <div class="demo-notice">🧪 Démonstration — aucune piscine réelle n’est pilotée.</div>
+    <h1>Essayez Pool Pilot comme dans Home Assistant</h1>
+    <p>Cette version light reprend l’apparence de la carte officielle Pool Pilot avec des données simulées. Aucun équipement réel n’est commandé.</p>
+    <div class="demo-notice">🧪 Démonstration locale — aucune piscine réelle n’est pilotée.</div>
   </header>
 
   <div class="demo-layout">
     <aside class="demo-scenarios" aria-label="Scénarios de démonstration">
       <h2>Scénarios</h2>
-      <p>Changez l’état du bassin pour voir comment Pool Pilot adapte son affichage et ses recommandations.</p>
+      <p>Changez l’état du bassin pour voir les valeurs, alertes et recommandations évoluer.</p>
       <button class="demo-scenario is-active" type="button" data-demo-scenario="balanced">✅ Piscine équilibrée</button>
       <button class="demo-scenario" type="button" data-demo-scenario="high-ph">⚠️ pH trop élevé</button>
       <button class="demo-scenario" type="button" data-demo-scenario="low-orp">🧪 Désinfection insuffisante</button>
@@ -20,50 +20,54 @@
     </aside>
 
     <div class="demo-card" data-demo-card>
-      <div class="demo-card-top">
-        <div>
-          <small>Pool Pilot · Démo</small>
-          <strong>Piscine</strong>
-        </div>
-        <span class="demo-live"><i></i> Simulation locale</span>
-      </div>
+      <div class="pp-demo-title">Piscine</div>
 
       <div class="demo-tabs" role="tablist" aria-label="Mode de la carte">
-        <button class="is-active" type="button" data-demo-tab="analysis">💧 Analyse</button>
-        <button type="button" data-demo-tab="control">🎛️ Contrôle</button>
+        <button class="is-active" type="button" data-demo-tab="analysis"><span>♧</span> Analyse</button>
+        <button type="button" data-demo-tab="control"><span>◉</span> Contrôle</button>
       </div>
 
       <section class="demo-panel is-active" data-demo-panel="analysis">
         <div class="demo-weather">
-          <span>air</span>
-          <strong data-demo-air>31,8 °C</strong>
-          <span class="demo-uv">UV <b data-demo-uv>7</b></span>
+          <div class="demo-air"><span>air</span><strong data-demo-air>31,8 °C</strong></div>
+          <div class="demo-weather-side">
+            <span class="demo-weather-icons">☀︎ · ☼</span>
+            <span class="demo-uv">UV <b data-demo-uv>7</b></span>
+            <span class="demo-weather-dots">● ●</span>
+          </div>
         </div>
 
         <div class="demo-equipment-row">
           <button class="demo-equipment is-on" type="button" data-demo-toggle="filter">
-            <span>🏊</span><span>Filtration</span><b data-demo-state="filter">ON</b>
+            <span class="demo-equipment-icon">♨</span><span class="demo-equipment-name">Pompe à filtration</span><b data-demo-state="filter">ON</b>
           </button>
           <button class="demo-equipment is-on" type="button" data-demo-toggle="heat">
-            <span>♨️</span><span>PAC</span><b data-demo-state="heat">ON</b>
+            <span class="demo-equipment-icon">▣</span><span class="demo-equipment-name">Pompe à chaleur</span><b data-demo-state="heat">ON</b>
           </button>
           <button class="demo-equipment" type="button" data-demo-toggle="light">
-            <span>💡</span><span>Éclairage</span><b data-demo-state="light">OFF</b>
+            <span class="demo-equipment-icon">≋</span><span class="demo-equipment-name">Nage contre-courant</span><b data-demo-state="light">OFF</b>
           </button>
         </div>
 
         <div class="demo-water">
+          <div class="demo-wave" aria-hidden="true"></div>
           <div class="demo-last-measure">
-            <span>📶</span>
+            <span class="demo-signal">⌁</span>
             <div><small>Dernière mesure de l’eau</small><strong data-demo-time>maintenant</strong></div>
-            <button type="button" title="Simuler une nouvelle mesure" data-demo-measure>⟳</button>
+            <button type="button" title="Simuler une nouvelle mesure" data-demo-measure>◴</button>
           </div>
 
           <div class="demo-temperature"><span>eau</span><strong data-demo-water>26,4 °C</strong></div>
 
           <div class="demo-gauges">
-            <div class="demo-gauge"><span>pH</span><strong data-demo-ph>7,20</strong><small data-demo-ph-state>Bon</small></div>
-            <div class="demo-gauge"><span>RedOx / ORP</span><strong data-demo-orp>690</strong><small data-demo-orp-state>Bon</small></div>
+            <div class="demo-gauge">
+              <div class="demo-gauge-ring"><i></i><strong data-demo-ph>7,20</strong></div>
+              <span>pH</span><small data-demo-ph-state>Bon</small>
+            </div>
+            <div class="demo-gauge">
+              <div class="demo-gauge-ring"><i></i><strong data-demo-orp>690</strong><em>mV</em></div>
+              <span>RedOx / ORP</span><small data-demo-orp-state>Bon</small>
+            </div>
           </div>
         </div>
 
@@ -74,6 +78,7 @@
       </section>
 
       <section class="demo-panel" data-demo-panel="control">
+        <div class="demo-control-head">Contrôle des équipements</div>
         <div class="demo-control-grid">
           <article>
             <div><span>Filtration</span><strong data-demo-filter-label>En cours</strong></div>
@@ -95,6 +100,12 @@
         <button class="demo-expert-button" type="button" data-demo-expert>⚙️ Ouvrir le mode Expert</button>
       </section>
 
+      <nav class="demo-bottom-nav" aria-label="Navigation de démonstration">
+        <button type="button" data-demo-tab="analysis"><span>≋</span><small>Menu</small></button>
+        <button class="demo-bottom-main" type="button" data-demo-expert><span>♨</span></button>
+        <button type="button" data-demo-tab="control"><span>▽</span><small>Pool House</small></button>
+      </nav>
+
       <div class="demo-expert" data-demo-expert-panel hidden>
         <div class="demo-expert-head"><strong>Mode Expert</strong><button type="button" data-demo-expert-close>×</button></div>
         <dl>
@@ -111,8 +122,8 @@
   <section class="demo-explain">
     <div>
       <span class="section-label">VERSION LIGHT</span>
-      <h2>Une démo fidèle, sans dépendre d’une instance Home Assistant</h2>
-      <p>La logique de cette page est volontairement simulée : elle reproduit les principaux états et interactions de Pool Pilot pour découvrir l’expérience avant installation.</p>
+      <h2>Le design officiel, avec une piscine simulée</h2>
+      <p>Cette démo reprend volontairement les codes visuels de Pool Pilot Dashboard. Les interactions sont simulées localement pour découvrir l’interface sans installer Home Assistant.</p>
     </div>
     <a class="button" href="{{ base_url_absolute }}/installation">Installer Pool Pilot via HACS</a>
   </section>
