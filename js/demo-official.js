@@ -42,16 +42,42 @@
       air: 32.0, water: 26.4, ph: 7.19, orp: 690, uv: 8,
       alert: 'none', chemistry: 'good', bathing: 'good',
       actions: 'Aucune action recommandée',
+      alertStatus: 'ok',
+      primaryAlert: null,
     },
     highph: {
       air: 32.5, water: 27.0, ph: 7.82, orp: 690, uv: 8,
       alert: 'Alerte : pH trop haut', chemistry: 'warning', bathing: 'warning',
       actions: 'Corriger le pH trop haut : ajouter du pH- selon le dosage recommandé par Pool Pilot.',
+      alertStatus: 'alerte',
+      primaryAlert: {
+        id: 'ph_high',
+        title: 'pH trop élevé',
+        icon: 'mdi:flask-outline',
+        message: 'Le pH est supérieur à la plage recommandée. Une correction est conseillée.',
+        steps: [
+          'Ajoutez progressivement du pH- selon le dosage indiqué sur votre produit et le volume de votre bassin.',
+          'Laissez la filtration fonctionner afin de bien répartir le correcteur dans l’eau.',
+          'Attendez la diffusion du produit puis effectuez une nouvelle mesure avant d’ajouter une dose supplémentaire.',
+        ],
+      },
     },
     loworp: {
       air: 31.6, water: 26.8, ph: 7.23, orp: 540, uv: 7,
       alert: 'Alerte : RedOx / ORP trop bas', chemistry: 'warning', bathing: 'warning',
       actions: 'Corriger le RedOx / ORP trop bas : réaliser le traitement chloré recommandé par Pool Pilot.',
+      alertStatus: 'alerte',
+      primaryAlert: {
+        id: 'orp_low',
+        title: 'Désinfection insuffisante',
+        icon: 'mdi:flask-plus-outline',
+        message: 'Le potentiel RedOx est trop bas : le niveau de désinfection doit être corrigé.',
+        steps: [
+          'Vérifiez d’abord que le pH reste dans la plage recommandée afin de garantir une désinfection efficace.',
+          'Effectuez le traitement chloré adapté à votre bassin ou augmentez temporairement la production de votre système de désinfection.',
+          'Laissez la filtration fonctionner pendant le traitement puis contrôlez à nouveau le RedOx avant la baignade.',
+        ],
+      },
     },
   };
 
@@ -61,6 +87,7 @@
     const s = scenarios[state.scenario];
     const d = state.measure;
     const local = d.toLocaleString('fr-FR', {day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit'}).replace(',', '');
+    const alertAttrs = s.primaryAlert ? { primary_alert:s.primaryAlert, pool_type:'chlorine' } : { pool_type:'chlorine' };
     return {
       'sensor.demo_water': entity('sensor.demo_water', s.water, {unit_of_measurement:'°C'}),
       'sensor.demo_air': entity('sensor.demo_air', s.air, {unit_of_measurement:'°C'}),
@@ -71,6 +98,7 @@
       'sensor.demo_chemistry': entity('sensor.demo_chemistry', s.chemistry),
       'sensor.demo_bathing': entity('sensor.demo_bathing', s.bathing),
       'sensor.demo_alert': entity('sensor.demo_alert', s.alert),
+      'sensor.demo_alert_status': entity('sensor.demo_alert_status', s.alertStatus, alertAttrs),
       'sensor.demo_actions': entity('sensor.demo_actions', s.actions, {pool_type:'chlorine'}),
       'sensor.demo_filtration_duration': entity('sensor.demo_filtration_duration', '13.2', {unit_of_measurement:'h'}),
       'sensor.demo_smart_filtration': entity('sensor.demo_smart_filtration', state.pump ? 'running' : 'waiting'),
@@ -137,6 +165,7 @@
     chemistry_state_entity: 'sensor.demo_chemistry',
     bathing_state_entity: 'sensor.demo_bathing',
     alert_entity: 'sensor.demo_alert',
+    alert_status_entity: 'sensor.demo_alert_status',
     actions_entity: 'sensor.demo_actions',
     action_summary_entity: 'sensor.demo_actions',
     pump_entity: 'switch.demo_pump',
